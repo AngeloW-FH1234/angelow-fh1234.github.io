@@ -11,6 +11,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
+/* Custom Font Definition */
+@font-face {
+    font-family: 'Arizona';
+    src: url('Arizona-Regular.woff2') format('woff2'),
+         url('Arizona-Regular.woff') format('woff'),
+         url('Arizona-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root{
     --primary:#E05146;
     --secondary:#0039A6;
@@ -23,6 +34,7 @@
     --chile-red:#D52B1E;
     --sunset-orange:#F28C28;
     --andes-gray:#5B6470;
+    --font-arizona: 'Arizona', 'Times New Roman', serif;
 }
 
 *{
@@ -124,7 +136,7 @@ padding:20px;
 }
 
 .welcome-banner h1 {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: var(--font-arizona);
   font-size: 5rem;
   margin-bottom: -5px;
 }
@@ -153,6 +165,7 @@ color:var(--primary);
 }
 
 .epithet{
+font-family: var(--font-arizona);
 color:var(--accent);
 font-style:italic;
 font-size:3rem;
@@ -170,7 +183,7 @@ margin-bottom:40px;
 }
 
 .section-title{
-font-family: 'Times New Roman', Times, serif;
+font-family: var(--font-arizona);
 font-size:2.5rem;
 color:var(--sunset-orange);
 border-bottom:4px solid var(--secondary);
@@ -357,14 +370,14 @@ margin-top:40px;
 }
 
 footer{
-background:va(--secondary);
+background:var(--secondary);
 font-weight: bold;
 color:#ddd;
 padding:50px 18px;
 text-align:center;
 margin-top:100px;
 border-radius:4px;
-font-family: 'Times New Roman', Times, serif;
+font-family: var(--font-arizona);
 }
 
 .footer-main {
@@ -881,7 +894,7 @@ function moveCarousel(direction) {
 }
 
 </script>
-    <div class="ad-container" style="max-width: 1200px; margin: 30px auto; text-align: center;">
+<div class="ad-container" style="max-width: 1200px; margin: 30px auto; text-align: center;">
   <ins class="adsbygoogle"
        style="display:block"
        data-ad-client="ca-pub-5615106883633154"
