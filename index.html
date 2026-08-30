@@ -87,7 +87,7 @@ margin:auto;
 padding:20px;
 }
 
-/* Simplified Banner Styling */
+/* Sliding Banner Container */
 .welcome-banner {
   position: relative;
   width: 100vw;
@@ -99,7 +99,7 @@ padding:20px;
   box-sizing: border-box;
 }
 
-/* Background image wrapper */
+/* Banner Slide Images */
 .banner-slide {
   position: absolute;
   top: 0;
@@ -112,6 +112,7 @@ padding:20px;
   z-index: 0;
 }
 
+/* Dark Overlay */
 .welcome-banner::before {
   content: "";
   position: absolute;
@@ -138,7 +139,7 @@ padding:20px;
 .welcome-banner p {
   margin-top: -10px;
 }
-    
+
 .large-text {
   font-size: 5rem;
   font-weight: bold;
@@ -481,6 +482,9 @@ font-family: 'Times New Roman', Times, serif;
   <section id="home-page">
     
     <div class="welcome-banner" id="welcome-banner">
+      <img id="banner-img-1" class="banner-slide" src="https://cdn.kimkim.com/files/a/content_articles/featured_photos/be98bc277ae019d9301bc24c8aa48bd60c0a84c1/big-27b7dbf129e822d09a9f89b2c6bdc697.jpg" alt="Chile Landscape 1">
+      <img id="banner-img-2" class="banner-slide" src="https://d1bv4heaa2n05k.cloudfront.net/user-images/1562240391248/shutterstock-792361144-(1)_main_1562240408468.jpeg" alt="Chile Landscape 2" style="transform: translateX(100%);">
+
       <div class="welcome-banner-content">
         <h1 id="welcome-text">Welcome! <span class="large-text"></span></h1>
         <p>
@@ -741,14 +745,6 @@ font-family: 'Times New Roman', Times, serif;
 </footer>
 
 <script>
-// Banner Background Images Switcher
- bannerImages = [
-  "https://cdn.kimkim.com/files/a/content_articles/featured_photos/be98bc277ae019d9301bc24c8aa48bd60c0a84c1/big-27b7dbf129e822d09a9f89b2c6bdc697.jpg",
-  "https://i.ibb.co/NgnhsGJK/image.jpg"
-];
-
-let bannerIndex = 0;
-
 let currentSlide = 0;
 
 function startBannerSlideshow() {
@@ -769,6 +765,10 @@ function startBannerSlideshow() {
     }
   }, 5000);
 }
+
+window.onload = function() {
+  startBannerSlideshow();
+
   alert("Welcome to TourISSm Escapade: Discover Chile!");
   const defaultNames = ["Explorer", "Voyager", "Wanderer", "Adventurer", "Pathfinder","Discoverer","Tourist"];
   const randomDefault = defaultNames[Math.floor(Math.random() * defaultNames.length)];
