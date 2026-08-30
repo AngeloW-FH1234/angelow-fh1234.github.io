@@ -150,7 +150,9 @@ nav a.active {
   margin-top: -10px;
 }
 
-.country-header {
+/* Shared Header Styling for Home and About Pages */
+.country-header,
+.about-header {
   margin-left: auto;
   margin-right: auto;
   background-color: transparent;
@@ -160,61 +162,24 @@ nav a.active {
   background-position: center;
   background-repeat: no-repeat;
   width: 90%;
-  height:575px;
+  height: 575px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 2rem;
   box-sizing: border-box;
+  margin-bottom: 30px;
 }
 
-.country-header h1 {
-  font-size: 3rem;
-  color: var(--primary);
-}
-.country-header p {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  text-align: left;
-  max-width: 75%;
-  margin: 0 auto;;
-}
-.about-header {
- margin-left: auto;
-  margin-right: auto;
-  background-color: transparent;
-  position: relative;
-  background-image: url('https://i.ibb.co/kskznzZW/image.png');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 90%;
-  height:575px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  box-sizing: border-box;
-}
-
+.country-header h1,
 .about-header h1 {
   font-size: 3rem;
   color: var(--primary);
   text-align: center;
 }
 
-.about-header .epithet {
-  font-family: var(--font-arizona);
-  color: var(--accent);
-  font-size: 2.2rem;
-  margin: 10px 0 20px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1.2;
-}
-
+.country-header p,
 .about-header p {
   font-size: 0.95rem;
   line-height: 1.4;
@@ -222,13 +187,16 @@ nav a.active {
   max-width: 75%;
   margin: 0 auto;
 }
+
 .epithet {
   font-family: var(--font-arizona);
   color: var(--accent);
   font-style: italic;
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin: 10px 0 20px;
   font-weight: bold;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .map-container {
@@ -392,39 +360,6 @@ nav a.active {
   color: var(--primary);
   margin-bottom: 10px;
 }
-.about-header {
-  background-image: none !important;
-  background-color: white;
-  height: auto !important;
-  padding: 3rem 2rem !important;
-  border-radius: 10px;
-  box-shadow: 0 3px 10px rgba(0,0,0,.08);
-  margin-bottom: 30px;
-}
-
-.about-header h1 {
-  font-size: 2.5rem;
-  color: var(--primary);
-  text-align: center;
-}
-
-.about-header .epithet {
-  font-family: var(--font-arizona);
-  color: var(--accent);
-  font-size: 2rem;
-  margin: 10px 0 20px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1.2;
-}
-
-.about-header p {
-  font-size: 1rem;
-  line-height: 1.5;
-  text-align: center;
-  max-width: 90%;
-  margin: 0 auto;
-}
 
 .about-table {
   width: 100%;
@@ -587,7 +522,9 @@ footer {
 
     <div class="country-header">
       <h1>CHILE</h1>
+      
       <div class="epithet">"Land of Poets"</div>
+      
       <p>
         <b>Chile</b>, officially the <i>Republic of Chile</i>, is a long, narrow country in South America squeezed between the Andes Mountains and the Pacific Ocean. Known for its incredible natural beauty, hyper-arid deserts, spectacular ice fields, rich culture, and warm hospitality, Chile offers an incredible journey across unique ecosystems and centuries of history.
       </p>
@@ -732,72 +669,74 @@ footer {
   </section>
 
   <section id="about-page" style="display:none;">
-  <div class="country-header about-header">
-    <h1>About the Web Developers</h1>
-    
-    <div class="epithet" id="about-epithet">
-      Chile Tourism & Cultural Exploration Project
+    <div class="about-header">
+      <h1>About the Web Developers</h1>
+      
+      <div class="epithet" id="about-epithet">
+        "Chile Tourism & Cultural Exploration Project"
+      </div>
+      
+      <p>
+        Meet the dedicated team behind this interactive tourism website created for the Grade 8 Araling Panlipunan and Web Programming Integrated Product Task.
+      </p>
     </div>
-    
-    <p>Meet the dedicated team behind this interactive tourism website created for the Grade 8 Araling Panlipunan and Web Programming Integrated Product Task.</p>
-  </div>
 
-  <h2 class="section-title">Developer Team</h2>
+    <h2 class="section-title">Developer Team</h2>
 
-  <table class="about-table">
-    <thead>
-      <tr>
-        <th>Developer 1x1 Pic</th>
-        <th>Developer</th>
-        <th>Developer's Task</th>
-        <th>Personal Tourism Slogan</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><img src="https://i.ibb.co/Txtx9CHc/image.jpg" class="avatar" alt="Rhian"></td>
-        <td><b>Rhian Karylle Mejia</b></td>
-        <td>Group Leader, Documentation, EDP Writer</td>
-        <td><i>"Explore the Beauty of Chile, a Land of Adventure!"</i></td>
-      </tr>
-      <tr>
-        <td><img src="https://i.ibb.co/Y41sxxYy/image.jpg" class="avatar" alt="Aeden"></td>
-        <td><b>Aeden Caelef A. Quintay</b></td>
-        <td>Content Researcher (History & Geography), EDP Writer</td>
-        <td><i>"Discover Chile, Where Dreams Come True!"</i></td>
-      </tr>
-      <tr>
-        <td><img src="" class="avatar" alt="Joseph"></td>
-        <td><b>Joseph Angelo J. Almeñana</b></td>
-        <td>Lead Programmer (HTML, CSS, JavaScript), Web development, User Experience, Code researcher, Image to link converter, EDP Writer</td>
-        <td><i>"From mountain high to desert sand All of nature in one wild land!"</i></td>
-      </tr>
-      <tr>
-        <td><img src="" class="avatar" alt="Aedam"></td>
-        <td><b>Aedam Joshua Aguinaldo</b></td>
-        <td>Content Researcher (History & Geography), EDP Writer</td>
-        <td><i>"Extreme nature, Endless Adventure!"</i></td>
-      </tr>
-      <tr>
-        <td><img src="" class="avatar" alt="Natasha"></td>
-        <td><b>Natasha Roque</b></td>
-        <td>Content Researcher (History & Geography), EDP Writer</td>
-        <td><i>"Small in size, Big in spirit!"</i></td>
-      </tr>
-    </tbody>
-  </table>
+    <table class="about-table">
+      <thead>
+        <tr>
+          <th>Developer 1x1 Pic</th>
+          <th>Developer</th>
+          <th>Developer's Task</th>
+          <th>Personal Tourism Slogan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><img src="https://i.ibb.co/Txtx9CHc/image.jpg" class="avatar" alt="Rhian"></td>
+          <td><b>Rhian Karylle Mejia</b></td>
+          <td>Group Leader, Documentation, EDP Writer</td>
+          <td><i>"Explore the Beauty of Chile, a Land of Adventure!"</i></td>
+        </tr>
+        <tr>
+          <td><img src="https://i.ibb.co/Y41sxxYy/image.jpg" class="avatar" alt="Aeden"></td>
+          <td><b>Aeden Caelef A. Quintay</b></td>
+          <td>Content Researcher (History & Geography), EDP Writer</td>
+          <td><i>"Discover Chile, Where Dreams Come True!"</i></td>
+        </tr>
+        <tr>
+          <td><img src="" class="avatar" alt="Joseph"></td>
+          <td><b>Joseph Angelo J. Almeñana</b></td>
+          <td>Lead Programmer (HTML, CSS, JavaScript), Web development, User Experience, Code researcher, Image to link converter, EDP Writer</td>
+          <td><i>"From mountain high to desert sand All of nature in one wild land!"</i></td>
+        </tr>
+        <tr>
+          <td><img src="" class="avatar" alt="Aedam"></td>
+          <td><b>Aedam Joshua Aguinaldo</b></td>
+          <td>Content Researcher (History & Geography), EDP Writer</td>
+          <td><i>"Extreme nature, Endless Adventure!"</i></td>
+        </tr>
+        <tr>
+          <td><img src="" class="avatar" alt="Natasha"></td>
+          <td><b>Natasha Roque</b></td>
+          <td>Content Researcher (History & Geography), EDP Writer</td>
+          <td><i>"Small in size, Big in spirit!"</i></td>
+        </tr>
+      </tbody>
+    </table>
 
-  <h2 class="section-title">Development Responsibilities</h2>
+    <h2 class="section-title">Development Responsibilities</h2>
 
-  <div style="background:white;padding:20px;border-radius:10px;">
-    <ul>
-      <li><b>Research:</b> Gathered accurate geographical and historical information about Chile.</li>
-      <li><b>Web Development:</b> Designed and developed the website using HTML5, CSS3, and JavaScript.</li>
-      <li><b>User Experience:</b> Implemented interactive navigation, tourist guide buttons, and responsive page layout.</li>
-      <li><b>Documentation:</b> Prepared APA references and ensured all content follows the project requirements.</li>
-    </ul>
-  </div>
-</section>
+    <div style="background:white;padding:20px;border-radius:10px;">
+      <ul>
+        <li><b>Research:</b> Gathered accurate geographical and historical information about Chile.</li>
+        <li><b>Web Development:</b> Designed and developed the website using HTML5, CSS3, and JavaScript.</li>
+        <li><b>User Experience:</b> Implemented interactive navigation, tourist guide buttons, and responsive page layout.</li>
+        <li><b>Documentation:</b> Prepared APA references and ensured all content follows the project requirements.</li>
+      </ul>
+    </div>
+  </section>
 </div>
 
 <marquee behavior="scroll" direction="left" scrollamount="10" style="font-size: 2.7rem; padding: 3px; background: var(--sunset-orange); margin-top: 40px;">
