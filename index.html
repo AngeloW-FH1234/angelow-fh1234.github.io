@@ -94,14 +94,23 @@ padding:20px;
 
 
 .welcome-banner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://cdn.kimkim.com/files/a/content_articles/featured_photos/be98bc277ae019d9301bc24c8aa48bd60c0a84c1/big-27b7dbf129e822d09a9f89b2c6bdc697.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   position: relative;
   width: 100vw;
   height: 400px;
   margin-left: calc(-50vw + 50%);
+  padding: 180px 50px 0 50px;
+  padding: 190px 50px 0 50px;
+  border-radius: 0;
   margin-bottom: 30px;
   overflow: hidden;
   color: white;
   box-sizing: border-box;
+  margin-bottom: 30px;
 }
 
 .banner-slide {
@@ -153,6 +162,11 @@ padding:20px;
   font-size: 5rem;
   font-weight: bold;
 }
+
+.welcome-banner p {
+  margin-top: -10px;
+}
+
 
 .country-header{
 background:white;
@@ -510,14 +524,12 @@ font-family: 'Times New Roman', Times, serif;
 
 <div class="container">
   <section id="home-page">
-<div class="welcome-banner" id="welcome-banner">
-  <div class="welcome-banner-content">
-    <h1 id="welcome-text">Welcome! <span class="large-text"></span></h1>
-    <p>
-      Welcome to Chile, the "Land of Poets" Discover the world’s longest and narrowest country, where stunning mountains, rich history, lively traditions, and memorable adventures await you.
-    </p>
-  </div>
-</div>
+    <div class="welcome-banner">
+      <h1 id="welcome-text">Welcome! <span class="large-text"></span></h1>
+      <p>
+        Welcome to Chile, the "Land of Poets" Discover the world’s longest and narrowest country, where stunning mountains, rich history, lively traditions, and memorable adventures await you.
+      </p>
+    </div>
 
 
 <div class="country-header">
