@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 Page Not Found - TourISSm Escapade: Chile</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+<style>
+/* Custom Font Definition */
+@font-face {
+  font-family: 'Arizona';
+  src: url('../fonts/Arizona-Regular.woff') format('woff'),
+       url('../fonts/Arizona-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --light-chile-red: #E05146;
+  --boeing-blue: #0039A6;
+  --terracota: #C936AD;
+  --bg-light: #F0F0F0;
+  --card-bg: #FFF;
+  --text-dark: #0F0F0F;
+  --very-black: #0C0C0C;
+  --dark-red: #5C130E;
+  --chile-red: #D52B1E;
+  --sunset-orange: #F28C28;
+  --andes-gray: #5B6470;
+  
+  --font-arizona: 'Playfair Display', 'Times New Roman', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: var(--dark-red);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  border-top: 5px solid var(--boeing-blue);
+  font-family: 'Roboto', sans-serif;
+}
+
+.logo {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--bg-light);
+  text-decoration: none;
+}
+
+nav a {
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  color: white;
+  margin-left: 18px;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 700;
+  transition: .3s;
+}
+
+nav a:hover {
+  background: var(--boeing-blue);
+  color: var(--bg-light);
+}
+
+.error-container {
+  max-width: 900px;
+  margin: 100px auto 40px;
+  padding: 20px;
+  flex: 1;
+  text-align: center;
+}
+
+.error-card {
+  background: white;
+  border-radius: 10px;
+  padding: 40px 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.08);
+  border-top: 6px solid var(--chile-red);
+}
+
+.error-code {
+  font-family: var(--font-arizona);
+  font-size: 7rem;
+  color: var(--chile-red);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.error-title {
+  font-family: var(--font-arizona);
+  font-size: 2.2rem;
+  color: var(--sunset-orange);
+  margin-bottom: 15px;
+}
+
+.error-description {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  color: var(--text-dark);
+}
+
+.action-btn {
+  display: inline-block;
+  background: var(--boeing-blue);
+  color: white;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.action-btn:hover {
+  background: var(--light-chile-red);
+  transform: scale(1.05);
+}
+
+marquee {
+  font-size: 2rem;
+  padding: 3px;
+  background: var(--sunset-orange);
+  margin-top: 40px;
+}
+
+footer {
+  background: var(--boeing-blue);
+  font-weight: bold;
+  color: #ddd;
+  padding: 30px 18px;
+  text-align: center;
+  font-family: var(--font-arizona);
+}
+
+.footer-main {
+  font-size: 1.2rem;
+  margin-bottom: 4.5px;
+}
+
+.footer-sub {
+  font-size: 0.85rem;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    TourISSm Escapade: <span style="color: var(--boeing-blue);">Wonders</span> of <span style="color: var(--chile-red);">Chile</span>
+  </a>
+
+  <nav>
+    <a href="index.html">Return to Website</a>
+  </nav>
+</header> 
+
+<div class="error-container">
+  <div class="error-card">
+    <div class="error-code">404</div>
+    <h1 class="error-title">Lost in the Atacama Desert?</h1>
+    <p class="error-description">
+      The page or destination you are looking for has drifted away like the glacier ice of Patagonia or does not exist.
+    </p>
+    <a href="index.html" class="action-btn">📍 Back to Main Explorer Page</a>
+  </div>
+</div>
+
+<marquee behavior="scroll" direction="left" scrollamount="10">
+  🇨🇱 
+  <span style="color: var(--chile-red);">DISCOVER</span>
+  <span style="color: var(--boeing-blue);">CHILE</span>
+  <span style="color: var(--bg-light);">—</span>
+  <span style="color: var(--chile-red);">From</span>
+  <span style="color: var(--boeing-blue);">the</span>
+  <span style="color: var(--bg-light);">dry</span>
+  <span style="color: var(--chile-red);">sands</span>
+  <span style="color: var(--boeing-blue);">of</span>
+  <span style="color: var(--bg-light);">the</span>
+  <span style="color: var(--chile-red);">Atacama</span>
+  <span style="color: var(--boeing-blue);">Desert</span>
+  <span style="color: var(--bg-light);">to</span>
+  <span style="color: var(--chile-red);">the</span>
+  <span style="color: var(--boeing-blue);">frozen</span>
+  <span style="color: var(--bg-light);">peaks</span>
+  <span style="color: var(--chile-red);">of</span>
+  <span style="color: var(--boeing-blue);">Patagonia!</span>
+  🇨🇱
+</marquee>
+
+<footer>
+  <p class="footer-main">© 2026 Grade 8 AP/ICT Integrated Product Task | Statefields School, Inc. All rights reserved.</p>
+  <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
+</footer>
+
+</body>
+</html>
