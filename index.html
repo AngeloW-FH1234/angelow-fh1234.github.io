@@ -11,7 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 
 <style>
-/* Custom Font Definition */
 @font-face {
   font-family: 'Arizona';
   src: url('../fonts/Arizona-Regular.woff') format('woff'),
@@ -239,19 +238,18 @@ nav a.active {
   border: 2px solid var(--boeing-blue);
 }
 
-/* FIXED AD CONTAINER & AD CODE STYLING */
 .ad-container {
   max-width: 1200px;
-  margin: 30px auto;
+  margin: 40px auto 0 auto;
   text-align: center;
-  min-height: 500px; /* Force minimum 500px reservation height */
+  min-height: 500px;
   display: block;
   clear: both;
 }
 
 ins.adsbygoogle {
   display: block;
-  min-height: 500px; /* Prevents ad slot collapse before Google fills it */
+  min-height: 500px;
   width: 100%;
 }
 
@@ -421,9 +419,9 @@ footer {
   background: var(--boeing-blue);
   font-weight: bold;
   color: #ddd;
-  padding: 50px 18px;
+  padding: 30px 18px;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 30px;
   border-radius: 4px;
   font-family: var(--font-arizona);
   clear: both;
@@ -798,6 +796,17 @@ footer {
   🇨🇱
 </marquee>
 
+<div class="ad-container">
+  <ins class="adsbygoogle"
+       data-ad-client="ca-pub-5615106883633154"
+       data-ad-slot="1571428464"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
 <div id="cookie-popup" class="cookie-popup">
   <p>We use cookies to understand how you interact with the site. By clicking "Accept", you agree to the use of cookies. <a href="javascript:void(0)" onclick="alert('This site uses cookies for session management and project functionality.')">Policy</a></p>
   <div class="cookie-actions">
@@ -809,21 +818,9 @@ footer {
 <footer>
   <p class="footer-main">© 2026 Grade 8 AP/ICT Integrated Product Task | Statefields School, Inc. All rights reserved.</p>
   <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
-
-  <div class="ad-container">
-    <ins class="adsbygoogle"
-         data-ad-client="ca-pub-5615106883633154"
-         data-ad-slot="1571428464"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
 </footer>
 
 <script>
-// Banner Background Images Switcher
 const bannerImages = [
   "https://cdn.kimkim.com/files/a/content_articles/featured_photos/be98bc277ae019d9301bc24c8aa48bd60c0a84c1/big-27b7dbf129e822d09a9f89b2c6bdc697.jpg",
   "https://d1bv4heaa2n05k.cloudfront.net/user-images/1562240391248/shutterstock-792361144-(1)_main_1562240408468.jpeg"
@@ -843,13 +840,11 @@ function startBannerSlideshow() {
   }, 5000);
 }
 
-// Preload Images
 bannerImages.forEach(src => {
   const img = new Image();
   img.src = src;
 });
 
-// Event Listeners
 window.addEventListener('load', function() {
   startBannerSlideshow();
 
@@ -945,7 +940,7 @@ function moveCarousel(direction) {
   
   if (totalCards === 0) return;
 
-  const cardWidth = cards[0].offsetWidth + 20; // 20px gap
+  const cardWidth = cards[0].offsetWidth + 20;
   const visibleCards = Math.round(track.parentElement.clientWidth / cards[0].offsetWidth);
   const maxStep = totalCards - visibleCards;
 
