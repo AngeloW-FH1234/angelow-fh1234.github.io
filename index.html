@@ -238,13 +238,23 @@ nav a.active {
   border-radius: 10px;
   border: 2px solid var(--boeing-blue);
 }
+
+/* FIXED AD CONTAINER & AD CODE STYLING */
 .ad-container {
   max-width: 1200px;
-  margin: 20px auto;
+  margin: 30px auto;
   text-align: center;
-  max-height: 90px;
-  overflow: hidden;
+  min-height: 500px; /* Force minimum 500px reservation height */
+  display: block;
+  clear: both;
 }
+
+ins.adsbygoogle {
+  display: block;
+  min-height: 500px; /* Prevents ad slot collapse before Google fills it */
+  width: 100%;
+}
+
 .pin-btn {
   background: var(--light-chile-red);
   color: white;
@@ -416,6 +426,7 @@ footer {
   margin-top: 100px;
   border-radius: 4px;
   font-family: var(--font-arizona);
+  clear: both;
 }
 
 .footer-main {
@@ -722,7 +733,7 @@ footer {
         </tr>
         <tr>
           <td><img src="https://i.ibb.co/Y41sxxYy/image.jpg" class="avatar" alt="Aeden"></td>
-          <td><b>Aeden Caeley A. Quintayo</b></b></td>
+          <td><b>Aeden Caeley A. Quintayo</b></td>
           <td>Content Researcher (History & Geography), EDP Writer</td>
           <td><i>"Discover Chile, Where Dreams Come True!"</i></td>
         </tr>
@@ -799,9 +810,8 @@ footer {
   <p class="footer-main">© 2026 Grade 8 AP/ICT Integrated Product Task | Statefields School, Inc. All rights reserved.</p>
   <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
 
-  <div class="ad-container" style="max-width: 1200px; margin: 30px auto; text-align: center;">
+  <div class="ad-container">
     <ins class="adsbygoogle"
-         style="display:block"
          data-ad-client="ca-pub-5615106883633154"
          data-ad-slot="1571428464"
          data-ad-format="auto"
