@@ -1,1 +1,27 @@
-
+{
+  "name": "TourISSm Escapade: Wonders of Chile",
+  "short_name": "TourISSm Chile",
+  "description": "A Journey Through the Wonders, Culture, and Natural Beauty of Chile.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F0F0F0",
+  "theme_color": "#5C130E",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
