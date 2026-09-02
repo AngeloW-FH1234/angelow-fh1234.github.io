@@ -1,1 +1,4 @@
-
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="chile-flag-icon" href="https://upload.wikimedia.org/wikipedia/commons/7/78/Flag_of_Chile.svg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original.svg">
+<link rel="manifest" href="/site.webmanifest">
