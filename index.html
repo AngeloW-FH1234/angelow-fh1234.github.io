@@ -185,6 +185,7 @@ nav a.active {
   max-width: 75%;
   margin: 0 auto;
 }
+
 #about-header p {
   font-size: 0.95rem;
   line-height: 1.4;
@@ -203,6 +204,7 @@ nav a.active {
   text-align: center;
   line-height: 1.2;
 }
+
 #about-epithet {
   font-family: var(--font-arizona);
   color: var(--chile-red);
@@ -242,14 +244,19 @@ nav a.active {
   max-width: 1200px;
   margin: 40px auto 0 auto;
   text-align: center;
-  min-height: 500px;
   display: block;
   clear: both;
 }
 
+.adsterra-wrapper {
+  margin-bottom: 25px;
+  overflow-x: auto;
+  text-align: center;
+}
+
 ins.adsbygoogle {
   display: block;
-  min-height: 500px;
+  min-height: 250px;
   width: 100%;
 }
 
@@ -516,6 +523,7 @@ footer {
     max-width: none;
   }
 }
+
 .your-hero-section {
   background-size: cover; 
   background-position: center; 
@@ -796,8 +804,6 @@ footer {
   🇨🇱
 </marquee>
 
-
-
 <div id="cookie-popup" class="cookie-popup">
   <p>We use cookies to understand how you interact with the site. By clicking "Accept", you agree to the use of cookies. <a href="javascript:void(0)" onclick="alert('This site uses cookies for session management and project functionality.')">Policy</a></p>
   <div class="cookie-actions">
@@ -810,18 +816,23 @@ footer {
   <p class="footer-main">© 2026 Grade 8 AP/ICT Integrated Product Task | Statefields School, Inc. All rights reserved.</p>
   <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
 </footer>
- <script>
-  atOptions = {
-    'key' : 'a8e1d9e87685314c4740e9c4584cc610',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highrevenueformat.com/a8e1d9e87685314c4740e9c4584cc610/invoke.js"></script>
 
 <div class="ad-container">
+  <!-- Adsterra Ad Unit -->
+  <div class="adsterra-wrapper">
+    <script>
+      atOptions = {
+        'key' : 'a8e1d9e87685314c4740e9c4584cc610',
+        'format' : 'iframe',
+        'height' : 90,
+        'width' : 728,
+        'params' : {}
+      };
+    </script>
+    <script src="https://www.highrevenueformat.com/a8e1d9e87685314c4740e9c4584cc610/invoke.js"></script>
+  </div>
+
+  <!-- Google AdSense Unit -->
   <ins class="adsbygoogle"
        data-ad-client="ca-pub-5615106883633154"
        data-ad-slot="1571428464"
@@ -831,6 +842,7 @@ footer {
        (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </div>
+
 <script>
 const bannerImages = [
   "https://cdn.kimkim.com/files/a/content_articles/featured_photos/be98bc277ae019d9301bc24c8aa48bd60c0a84c1/big-27b7dbf129e822d09a9f89b2c6bdc697.jpg",
