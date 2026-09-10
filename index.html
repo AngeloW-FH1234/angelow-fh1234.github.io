@@ -566,35 +566,47 @@ footer {
     </div>
 
     <div class="map-container">
-      <h2 class="section-title">Interactive Tourist Guide Map</h2>
-      <p>Click a destination below to learn more.</p>
+  <h2 class="section-title">Interactive Tourist Guide Map</h2>
+  <p>Click a destination below to learn more.</p>
 
-      <div class="interactive-map">
-        <button class="pin-btn" onclick="inspectPin('General Carrera Lakes','Aysen Region, Southern Chile','A stunning turquoise-blue glacial lake in Patagonia that is surrounded by mountains, famous for its Marble Caves.')">
-          📍 General Carrera Lakes
-        </button>
+  <div class="interactive-map">
+    <div class="pins-list">
+      <button class="pin-btn" onclick="inspectPin('General Carrera Lakes','Aysen Region, Southern Chile','A stunning turquoise-blue glacial lake in Patagonia that is surrounded by mountains, famous for its Marble Caves.')">
+        📍 General Carrera Lakes
+      </button>
 
-        <button class="pin-btn" onclick="inspectPin('Villarrica & Lake District','Araucanía Region, Southern Chile','The Villarrica beautiful lake district centered around Lake Villarrica, known for its clear water and mountain views. The Villarrica Volcano is one of Chile\'s most active volcanoes.')">
-          📍 Villarrica & Lake District
-        </button>
+      <button class="pin-btn" onclick="inspectPin('Villarrica & Lake District','Araucanía Region, Southern Chile','The Villarrica beautiful lake district centered around Lake Villarrica, known for its clear water and mountain views. The Villarrica Volcano is one of Chile\'s most active volcanoes.')">
+        📍 Villarrica & Lake District
+      </button>
 
-        <button class="pin-btn" onclick="inspectPin('Easter Island (Rapa Nui)','Valparaíso Region','Rapa Nui or Easter Island is a remote volcanic island in the Pacific Ocean. It\'s famous for nearly 1,000 monumental stone human figures called Moai.')">
-          📍 Easter Island (Rapa Nui)
-        </button>
+      <button class="pin-btn" onclick="inspectPin('Easter Island (Rapa Nui)','Valparaíso Region','Rapa Nui or Easter Island is a remote volcanic island in the Pacific Ocean. It\'s famous for nearly 1,000 monumental stone human figures called Moai.')">
+        📍 Easter Island (Rapa Nui)
+      </button>
 
-        <button class="pin-btn" onclick="inspectPin('Cristo Redentor de los Andes','Andes Mountains, near the Chile-Argentina border','23-foot-high statue of Christ standing on a globe. This statue is used to represent peace and unity between Chile and Argentina.')">
-          📍 Cristo Redentor de los Andes
-        </button>
+      <button class="pin-btn" onclick="inspectPin('Cristo Redentor de los Andes','Andes Mountains, near the Chile-Argentina border','23-foot-high statue of Christ standing on a globe. This statue is used to represent peace and unity between Chile and Argentina.')">
+        📍 Cristo Redentor de los Andes
+      </button>
 
-        <button class="pin-btn" onclick="inspectPin('Valle de la Luna','San Pedro de Atacama, Antofagasta Region, Northern Chile','The Valle de la Luna is a moon-like desert, known for its unique geography and sanctuary of stone and salt displays a dreamlike landscape.')">
-          📍 Valle de la Luna
-        </button>
-
-        <div id="map-display-box">
-          <i>Select a destination above.</i>
-        </div>
-      </div>
+      <button class="pin-btn" onclick="inspectPin('Valle de la Luna','San Pedro de Atacama, Antofagasta Region, Northern Chile','The Valle de la Luna is a moon-like desert, known for its unique geography and sanctuary of stone and salt displays a dreamlike landscape.')">
+        📍 Valle de la Luna
+      </button>
     </div>
+    <div id="map-display-box">
+      <i>Select a destination on the left to view details.</i>
+    </div>
+  </div>
+</div>
+
+<script>
+  function inspectPin(title, location, description) {
+    const displayBox = document.getElementById('map-display-box');
+    displayBox.innerHTML = `
+      <h3>📍 ${title}</h3>
+      <h4>${location}</h4>
+      <p>${description}</p>
+    `;
+  }
+</script>
 
     <h2 class="section-title">7 Natural Landscapes of Chile</h2>
     <p>Explore the beauty of Chile’s natural landscapes and breathtaking views using the arrows to slide through all 7 destinations.</p>
