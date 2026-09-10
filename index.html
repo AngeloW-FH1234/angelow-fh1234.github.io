@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -234,11 +235,62 @@ nav a.active {
   margin: 40px 0 20px;
 }
 
+/* UPDATED FLEXBOX LAYOUT FOR INTERACTIVE MAP */
 .interactive-map {
-  padding: 35px;
+  padding: 25px;
   background: #eef7ff;
   border-radius: 10px;
   border: 2px solid var(--boeing-blue);
+  display: flex;
+  gap: 20px;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.pins-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.pin-btn {
+  background: var(--light-chile-red);
+  color: white;
+  padding: 12px 18px;
+  margin: 0;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .3s;
+  text-align: left;
+  width: 100%;
+}
+
+.pin-btn:hover {
+  background: var(--boeing-blue);
+  color: white;
+  transform: translateX(4px);
+}
+
+#map-display-box {
+  flex: 1.5;
+  min-height: 250px;
+  margin-top: 0;
+  padding: 20px;
+  background: white;
+  border: 2px dashed var(--light-chile-red);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .interactive-map {
+    flex-direction: column;
+  }
+  #map-display-box {
+    width: 100%;
+  }
 }
 
 .ad-container {
@@ -255,32 +307,6 @@ nav a.active {
   text-align: center;
   transform: scale(1.4);
   transform-origin: top center;
-}
-
-.pin-btn {
-  background: var(--light-chile-red);
-  color: white;
-  padding: 10px 18px;
-  margin: 8px;
-  border: none;
-  border-radius: 25px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: .3s;
-}
-
-.pin-btn:hover {
-  background: var(--boeing-blue);
-  color: white;
-  transform: scale(1.05);
-}
-
-#map-display-box {
-  margin-top: 20px;
-  padding: 15px;
-  background: white;
-  border: 2px dashed var(--light-chile-red);
-  border-radius: 8px;
 }
 
 .carousel-wrapper {
@@ -566,47 +592,39 @@ footer {
     </div>
 
     <div class="map-container">
-  <h2 class="section-title">Interactive Tourist Guide Map</h2>
-  <p>Click a destination below to learn more.</p>
+      <h2 class="section-title">Interactive Tourist Guide Map</h2>
+      <p style="margin-bottom: 20px;">Click a destination below to learn more.</p>
 
-  <div class="interactive-map">
-    <div class="pins-list">
-      <button class="pin-btn" onclick="inspectPin('General Carrera Lakes','Aysen Region, Southern Chile','A stunning turquoise-blue glacial lake in Patagonia that is surrounded by mountains, famous for its Marble Caves.')">
-        📍 General Carrera Lakes
-      </button>
+      <div class="interactive-map">
+        <!-- Left Side: Navigation Titles -->
+        <div class="pins-list">
+          <button class="pin-btn" onclick="inspectPin('General Carrera Lakes','Aysen Region, Southern Chile','A stunning turquoise-blue glacial lake in Patagonia that is surrounded by mountains, famous for its Marble Caves.')">
+            📍 General Carrera Lakes
+          </button>
 
-      <button class="pin-btn" onclick="inspectPin('Villarrica & Lake District','Araucanía Region, Southern Chile','The Villarrica beautiful lake district centered around Lake Villarrica, known for its clear water and mountain views. The Villarrica Volcano is one of Chile\'s most active volcanoes.')">
-        📍 Villarrica & Lake District
-      </button>
+          <button class="pin-btn" onclick="inspectPin('Villarrica & Lake District','Araucanía Region, Southern Chile','The Villarrica beautiful lake district centered around Lake Villarrica, known for its clear water and mountain views. The Villarrica Volcano is one of Chile\'s most active volcanoes.')">
+            📍 Villarrica & Lake District
+          </button>
 
-      <button class="pin-btn" onclick="inspectPin('Easter Island (Rapa Nui)','Valparaíso Region','Rapa Nui or Easter Island is a remote volcanic island in the Pacific Ocean. It\'s famous for nearly 1,000 monumental stone human figures called Moai.')">
-        📍 Easter Island (Rapa Nui)
-      </button>
+          <button class="pin-btn" onclick="inspectPin('Easter Island (Rapa Nui)','Valparaíso Region','Rapa Nui or Easter Island is a remote volcanic island in the Pacific Ocean. It\'s famous for nearly 1,000 monumental stone human figures called Moai.')">
+            📍 Easter Island (Rapa Nui)
+          </button>
 
-      <button class="pin-btn" onclick="inspectPin('Cristo Redentor de los Andes','Andes Mountains, near the Chile-Argentina border','23-foot-high statue of Christ standing on a globe. This statue is used to represent peace and unity between Chile and Argentina.')">
-        📍 Cristo Redentor de los Andes
-      </button>
+          <button class="pin-btn" onclick="inspectPin('Cristo Redentor de los Andes','Andes Mountains, near the Chile-Argentina border','23-foot-high statue of Christ standing on a globe. This statue is used to represent peace and unity between Chile and Argentina.')">
+            📍 Cristo Redentor de los Andes
+          </button>
 
-      <button class="pin-btn" onclick="inspectPin('Valle de la Luna','San Pedro de Atacama, Antofagasta Region, Northern Chile','The Valle de la Luna is a moon-like desert, known for its unique geography and sanctuary of stone and salt displays a dreamlike landscape.')">
-        📍 Valle de la Luna
-      </button>
+          <button class="pin-btn" onclick="inspectPin('Valle de la Luna','San Pedro de Atacama, Antofagasta Region, Northern Chile','The Valle de la Luna is a moon-like desert, known for its unique geography and sanctuary of stone and salt displays a dreamlike landscape.')">
+            📍 Valle de la Luna
+          </button>
+        </div>
+
+        <!-- Right Side: Details Box -->
+        <div id="map-display-box">
+          <i>Select a destination on the left to view details.</i>
+        </div>
+      </div>
     </div>
-    <div id="map-display-box">
-      <i>Select a destination on the left to view details.</i>
-    </div>
-  </div>
-</div>
-
-<script>
-  function inspectPin(title, location, description) {
-    const displayBox = document.getElementById('map-display-box');
-    displayBox.innerHTML = `
-      <h3>📍 ${title}</h3>
-      <h4>${location}</h4>
-      <p>${description}</p>
-    `;
-  }
-</script>
 
     <h2 class="section-title">7 Natural Landscapes of Chile</h2>
     <p>Explore the beauty of Chile’s natural landscapes and breathtaking views using the arrows to slide through all 7 destinations.</p>
@@ -829,7 +847,6 @@ footer {
 <script async="async" data-cfasync="false" src="https://pl31168352.profitableratecpmnetwork.com/d83cd1086cf7b7f9bb2de34d2183e097/invoke.js"></script>
 <div id="container-d83cd1086cf7b7f9bb2de34d2183e097"></div>
 
-
 <script>
 const bannerImages = [
   "https://cdn.kimkim.com/files/a/content_articles/featured_photos/be98bc277ae019d9301bc24c8aa48bd60c0a84c1/big-27b7dbf129e822d09a9f89b2c6bdc697.jpg",
@@ -936,9 +953,9 @@ function showPage(pageName){
 
 function inspectPin(name, location, summary){
   document.getElementById("map-display-box").innerHTML =
-  "<b>Selected Destination:</b> " + name +
-  "<br><b>Location:</b> " + location +
-  "<br><b>Overview:</b> " + summary;
+  "<h3 style='color: var(--chile-red); margin-bottom: 8px;'>📍 " + name + "</h3>" +
+  "<p style='margin-bottom: 10px;'><b>Location:</b> " + location + "</p>" +
+  "<p><b>Overview:</b> " + summary + "</p>";
 }
 
 let currentStep = 0;
