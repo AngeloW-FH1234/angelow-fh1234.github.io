@@ -187,7 +187,7 @@ nav a.active {
   line-height: 1.2;
 }
   
-  .epithet-paragraph {
+.epithet-paragraph {
   font-family: var(--font-arizona);
   color: var(--very-black);
   font-size: 2.2rem;
@@ -238,7 +238,7 @@ nav a.active {
   padding: 12px 18px;
   margin: 0;
   border: none;
-  border-radius: 1;
+  border-radius: 4px;
   font-weight: bold;
   cursor: pointer;
   transition: .3s;
@@ -260,6 +260,14 @@ nav a.active {
   background: white;
   border: 2px dashed var(--light-chile-red);
   border-radius: 8px;
+}
+
+#map-display-box img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 12px;
 }
 
 @media (max-width: 768px) {
@@ -647,23 +655,23 @@ footer {
 
       <div class="interactive-map">
         <div class="pins-list">
-          <button class="pin-btn" onclick="inspectPin('General Carrera Lakes','Aysen Region, Southern Chile','A stunning turquoise-blue glacial lake in Patagonia that is surrounded by mountains, famous for its Marble Caves.')">
+          <button class="pin-btn" onclick="inspectPin('General Carrera Lakes','Aysen Region, Southern Chile','A stunning turquoise-blue glacial lake in Patagonia that is surrounded by mountains, famous for its Marble Caves.','https://i.ibb.co/5gqvG89T/image.jpg')">
             📍 General Carrera Lakes
           </button>
 
-          <button class="pin-btn" onclick="inspectPin('Villarrica & Lake District','Araucanía Region, Southern Chile','The Villarrica beautiful lake district centered around Lake Villarrica, known for its clear water and mountain views. The Villarrica Volcano is one of Chile\'s most active volcanoes.')">
+          <button class="pin-btn" onclick="inspectPin('Villarrica & Lake District','Araucanía Region, Southern Chile','The Villarrica beautiful lake district centered around Lake Villarrica, known for its clear water and mountain views. The Villarrica Volcano is one of Chile\'s most active volcanoes.','https://i.ibb.co/zHJsNScZ/image.jpg')">
             📍 Villarrica & Lake District
           </button>
 
-          <button class="pin-btn" onclick="inspectPin('Easter Island (Rapa Nui)','Valparaíso Region','Rapa Nui or Easter Island is a remote volcanic island in the Pacific Ocean. It\'s famous for nearly 1,000 monumental stone human figures called Moai.')">
+          <button class="pin-btn" onclick="inspectPin('Easter Island (Rapa Nui)','Valparaíso Region','Rapa Nui or Easter Island is a remote volcanic island in the Pacific Ocean. It\'s famous for nearly 1,000 monumental stone human figures called Moai.','https://i.ibb.co/zVS0BN6s/image.jpg')">
             📍 Easter Island (Rapa Nui)
           </button>
 
-          <button class="pin-btn" onclick="inspectPin('Cristo Redentor de los Andes','Andes Mountains, near the Chile-Argentina border','23-foot-high statue of Christ standing on a globe. This statue is used to represent peace and unity between Chile and Argentina.')">
+          <button class="pin-btn" onclick="inspectPin('Cristo Redentor de los Andes','Andes Mountains, near the Chile-Argentina border','23-foot-high statue of Christ standing on a globe. This statue is used to represent peace and unity between Chile and Argentina.','https://i.ibb.co/rK4Bb7Sb/image.jpg')">
             📍 Cristo Redentor de los Andes
           </button>
 
-          <button class="pin-btn" onclick="inspectPin('Valle de la Luna','San Pedro de Atacama, Antofagasta Region, Northern Chile','The Valle de la Luna is a moon-like desert, known for its unique geography and sanctuary of stone and salt displays a dreamlike landscape.')">
+          <button class="pin-btn" onclick="inspectPin('Valle de la Luna','San Pedro de Atacama, Antofagasta Region, Northern Chile','The Valle de la Luna is a moon-like desert, known for its unique geography and sanctuary of stone and salt displays a dreamlike landscape.','https://i.ibb.co/C3Y9RD2t/image.jpg')">
             📍 Valle de la Luna
           </button>
         </div>
@@ -1011,8 +1019,10 @@ function showPage(pageName){
   }
 }
 
-function inspectPin(name, location, summary){
+function inspectPin(name, location, summary, imageUrl){
+  let imageTag = imageUrl ? "<img src='" + imageUrl + "' alt='" + name + "' style='width:100%; max-height:200px; object-fit:cover; border-radius:6px; margin-bottom:12px;'>" : "";
   document.getElementById("map-display-box").innerHTML =
+  imageTag +
   "<h3 style='color: var(--chile-red); margin-bottom: 8px;'>📍 " + name + "</h3>" +
   "<p style='margin-bottom: 10px;'><b>Location:</b> " + location + "</p>" +
   "<p><b>Overview:</b> " + summary + "</p>";
@@ -1022,6 +1032,7 @@ let currentStep = 0;
 
 function moveCarousel(direction) {
   const track = document.getElementById('carouselTrack');
+  if (!track) return;
   const cards = track.children;
   const totalCards = cards.length;
   
