@@ -902,7 +902,6 @@ footer {
   <span style="color: var(--very-black);">Poets!</span>
   🇨🇱
 </marquee>
-
 <footer>
   <p class="footer-main">© 2026 Grade 8 AP/ICT Integrated Product Task | Statefields School, Inc. All rights reserved.</p>
   <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
@@ -947,11 +946,6 @@ window.addEventListener('load', function() {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const popup = document.getElementById("cookie-popup");
-  const acceptBtn = document.getElementById("accept-cookie-btn");
-  const declineBtn = document.getElementById("decline-cookie-btn");
-
-
   function showBanner() {
     if (popup) {
       popup.style.display = "flex";
@@ -962,7 +956,28 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   showBanner();
-  
+
+  if (acceptBtn) {
+    acceptBtn.addEventListener("click", function () {
+      localStorage.setItem("cookiesAccepted", "true");
+      popup.classList.remove("show");
+      setTimeout(() => {
+        popup.style.display = "none";
+      }, 500);
+    });
+  }
+
+  if (declineBtn) {
+    declineBtn.addEventListener("click", function () {
+      localStorage.removeItem("cookiesAccepted"); 
+      popup.classList.remove("show");
+      setTimeout(() => {
+        showBanner();
+      }, 1500);
+    });
+  }
+});
+
 function showPage(pageName){
   let home = document.getElementById("home-page");
   let about = document.getElementById("about-page");
