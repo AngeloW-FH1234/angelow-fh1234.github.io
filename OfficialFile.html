@@ -903,14 +903,6 @@ footer {
   🇨🇱
 </marquee>
 
-<div id="cookie-popup" class="cookie-popup">
-  <p>We use cookies to understand how you interact with the site. By clicking "Accept", you agree to the use of cookies. <a href="javascript:void(0)" onclick="alert('This site uses cookies for session management and project functionality.')">Policy</a></p>
-  <div class="cookie-actions">
-    <button id="decline-cookie-btn" class="btn-decline">Decline</button>
-    <button id="accept-cookie-btn" class="btn-accept">Accept</button>
-  </div>
-</div>
-
 <footer>
   <p class="footer-main">© 2026 Grade 8 AP/ICT Integrated Product Task | Statefields School, Inc. All rights reserved.</p>
   <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
@@ -959,10 +951,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const acceptBtn = document.getElementById("accept-cookie-btn");
   const declineBtn = document.getElementById("decline-cookie-btn");
 
-  if (localStorage.getItem("cookiesAccepted") === "true") {
-    if (popup) popup.style.display = "none";
-    return;
-  }
 
   function showBanner() {
     if (popup) {
@@ -974,28 +962,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   showBanner();
-
-  if (acceptBtn) {
-    acceptBtn.addEventListener("click", function () {
-      localStorage.setItem("cookiesAccepted", "true");
-      popup.classList.remove("show");
-      setTimeout(() => {
-        popup.style.display = "none";
-      }, 500);
-    });
-  }
-
-  if (declineBtn) {
-    declineBtn.addEventListener("click", function () {
-      localStorage.removeItem("cookiesAccepted"); 
-      popup.classList.remove("show");
-      setTimeout(() => {
-        showBanner();
-      }, 1500);
-    });
-  }
-});
-
+  
 function showPage(pageName){
   let home = document.getElementById("home-page");
   let about = document.getElementById("about-page");
