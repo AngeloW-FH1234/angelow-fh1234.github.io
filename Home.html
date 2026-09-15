@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TourISSm Escapade: Discover Chile</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --light-chile-red: #E05146;
+      --boeing-blue: #0039A6;
+      --bg-light: #F0F0F0;
+      --text-dark: #0F0F0F;
+      --very-black: #0C0C0C;
+      --dark-red: #5C130E;
+      --chile-red: #D52B1E;
+      --sunset-orange: #F28C28;
+      --andes-gray: #5B6470;
+      --font-arizona: 'Playfair Display', 'Times New Roman', serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--very-black);
+      color: white;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden; /* Locks screen scrolling */
+      position: relative;
+    }
+
+    .bg-hero {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://cdn.kimkim.com/files/a/content_articles/featured_photos/be98bc277ae019d9301bc24c8aa48bd60c0a84c1/big-27b7dbf129e822d09a9f89b2c6bdc697.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.4) contrast(1.1);
+      z-index: 1;
+      animation: zoomBg 20s infinite alternate linear;
+    }
+
+    @keyframes zoomBg {
+      from { transform: scale(1); }
+      to { transform: scale(1.08); }
+    }
+
+    .landing-wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .glass-card {
+      background: rgba(240, 240, 240, 0.75);
+      backdrop-filter: blur(8px);
+      border: 2px solid var(--dark-red);
+      border-top: 6px solid var(--boeing-blue);
+      border-radius: 12px;
+      padding: 12px 30px 24px 30px; /* Reduced top padding */
+      max-width: 800px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-block;
+      background-color: var(--chile-red);
+      color: white;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-family: 'Roboto', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--bg-light);
+      margin-bottom: 8px;
+    }
+
+    .title .accent-blue { color: var(--boeing-blue); }
+    .title .accent-red { color: var(--light-chile-red); }
+
+    .subtitle {
+      font-family: var(--font-arizona);
+      color: var(--sunset-orange);
+      font-size: 2.5rem;
+      font-style: italic;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .description {
+      font-size: 1.05rem;
+      color: #E0E0E0;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .enter-btn {
+      display: inline-block;
+      background-color: var(--chile-red);
+      color: white;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 12px 36px;
+      border-radius: 8px;
+      border: 2px solid var(--boeing-blue);
+      box-shadow: 0 4px 15px rgba(213, 43, 30, 0.4);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .enter-btn:hover {
+      background-color: var(--boeing-blue);
+      border-color: var(--chile-red);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(0, 57, 166, 0.6);
+    }
+
+    .credits {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: var(--andes-gray);
+      font-family: var(--font-arizona);
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      background: var(--dark-red);
+      border-top: 3px solid var(--boeing-blue);
+      color: #ddd;
+      padding: 12px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-family: var(--font-arizona);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-hero"></div>
+
+  <div class="landing-wrapper">
+    <div class="glass-card">
+      <span class="badge">Grade 8 AP/ICT Integrated Project</span>
+      
+      <h1 class="title">
+        TourISSm Escapade: <span class="accent-blue">Wonders</span> of <span class="accent-red">Chile</span>
+      </h1>
+      
+      <div class="subtitle">"The Land of Poets"</div>
+      
+      <p class="description">
+        Embark on an immersive journey through South America’s narrowest jewel. From the hyper-arid sands of the Atacama Desert to the glacial fjords of Patagonia, explore the vibrant culture, rich history, and breath-taking natural wonders of Chile.
+      </p>
+
+      <a href="Home_Page.html" class="enter-btn">
+        ENTER EXPLORATION ➔
+      </a>
+
+      <div class="credits">
+        Developed by Group 8 (8A) | Statefields School, Inc.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 TourISSm Escapade | Statefields School, Inc. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
