@@ -42,6 +42,11 @@ body {
   padding: 27px;
 }
 
+body.light-theme {
+  background: #ffffff;
+  color: #111111;
+}
+
 header {
   position: fixed;
   top: 0;
@@ -998,30 +1003,153 @@ footer {
 </footer>
 
 <script>
+  // Global State Variables
+  let currentCarouselIndex = 0;
+
   // DOM Elements
   const accountModal = document.getElementById('accountModal');
   const generalModal = document.getElementById('generalModal');
-  const welcomeUser = document.getElementById('welcomeUser');
+  const welcomeText = document.getElementById('welcome-text');
 
-  // Helper function to handle modal closures cleanly
+  // Page Navigation Handler
+  function showPage(pageId) {
+    const homePage = document.getElementById('home-page');
+    const aboutPage = document.getElementById('about-page');
+    const navHome = document.getElementById('nav-home');
+    const navAbout = document.getElementById('nav-about');
+
+    if (pageId === 'home') {
+      homePage.style.display = 'block';
+      aboutPage.style.display = 'none';
+      navHome.classList.add('active');
+      navAbout.classList.remove('active');
+    } else if (pageId === 'about') {
+      homePage.style.display = 'none';
+      aboutPage.style.display = 'block';
+      navHome.classList.remove('active');
+      navAbout.classList.add('active');
+    }
+  }
+
+  // Login Navigation
+  function redirectToLogin() {
+    window.location.href = 'Login';
+  }
+
+  // Profile Dropdown Toggle
+  function toggleUserMenu(event) {
+    event.stopPropagation();
+    const dropdown = document.getElementById('profile-dropdown');
+    if (dropdown) dropdown.classList.toggle('show');
+  }
+
+  // Close dropdown on outside click
+  window.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('profile-dropdown');
+    if (dropdown && dropdown.classList.contains('show')) {
+      dropdown.classList.remove('show');
+    }
+  });
+
+  // Open Settings Placeholder Handlers
+  function openAccountSettings() {
+    if (accountModal) {
+      accountModal.style.display = 'flex';
+    } else {
+      alert('Account Settings modal is not present on this page.');
+    }
+  }
+
+  function openGeneralSettings() {
+    if (generalModal) {
+      generalModal.style.display = 'flex';
+    } else {
+      alert('General Settings modal is not present on this page.');
+    }
+  }
+
+  // Logout Functionality
+  function handleLogout() {
+    localStorage.removeItem('currentUser');
+    localStorage.setItem('isLoggedIn', 'false');
+    alert('Logged out successfully.');
+    window.location.reload();
+  }
+
+  // Interactive Map Inspector
+  function inspectPin(title, location, description, imageUrl) {
+    const displayBox = document.getElementById('map-display-box');
+    if (displayBox) {
+      displayBox.innerHTML = `
+        <img src="${imageUrl}" alt="${title}">
+        <h3 style="color: var(--chile-red); margin-bottom: 5px;">${title}</h3>
+        <p><strong>Location:</strong> ${location}</p>
+        <p style="margin-top: 8px;">${description}</p>
+      `;
+    }
+  }
+
+  // Natural Landscapes Carousel Control
+  function moveCarousel(direction) {
+    const track = document.getElementById('carouselTrack');
+    if (!track) return;
+
+    const cards = track.querySelectorAll('.carousel-card');
+    const totalCards = cards.length;
+    
+    // Determine visible cards based on screen size
+    let cardsVisible = 3;
+    if (window.innerWidth <= 600) {
+      cardsVisible = 1;
+    } else if (window.innerWidth <= 900) {
+      cardsVisible = 2;
+    }
+
+    const maxIndex = totalCards - cardsVisible;
+    currentCarouselIndex += direction;
+
+    if (currentCarouselIndex < 0) {
+      currentCarouselIndex = 0;
+    } else if (currentCarouselIndex > maxIndex) {
+      currentCarouselIndex = maxIndex;
+    }
+
+    const cardWidth = cards[0].offsetWidth + 20; // 20px gap
+    track.style.transform = `translateX(-${currentCarouselIndex * cardWidth}px)`;
+  }
+
+  // Close Modals Helper
   function closeModals() {
     if (accountModal) accountModal.style.display = 'none';
     if (generalModal) generalModal.style.display = 'none';
   }
 
-  // Load Current User Data & Preferences on Page Load
+  // Page Load Initialization
   document.addEventListener('DOMContentLoaded', () => {
+    // Session State Management
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    
-    if (currentUser) {
-      if (welcomeUser) welcomeUser.textContent = `Welcome back, ${currentUser.fullName}!`;
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true' || !!currentUser;
+    const navLogin = document.getElementById('nav-login');
+    const navProfile = document.getElementById('nav-profile');
+
+    if (isLoggedIn && currentUser) {
+      if (navLogin) navLogin.style.display = 'none';
+      if (navProfile) navProfile.style.display = 'inline-flex';
+      if (welcomeText) {
+        welcomeText.innerHTML = `Welcome back, <span class="large-text">${currentUser.fullName || 'Explorer'}!</span>`;
+      }
+
+      // Populate Settings Inputs if available
       const accName = document.getElementById('accName');
       const accEmail = document.getElementById('accEmail');
       if (accName) accName.value = currentUser.fullName || '';
       if (accEmail) accEmail.value = currentUser.email || '';
+    } else {
+      if (navLogin) navLogin.style.display = 'inline-block';
+      if (navProfile) navProfile.style.display = 'none';
     }
 
-    // Load Saved General Settings
+    // General Preferences Application
     const generalSettings = JSON.parse(localStorage.getItem('generalSettings'));
     if (generalSettings) {
       const themeSelect = document.getElementById('themeSelect');
@@ -1031,12 +1159,37 @@ footer {
       if (themeSelect) themeSelect.value = generalSettings.theme || 'dark';
       if (currencySelect) currencySelect.value = generalSettings.currency || 'CLP';
       if (notifications) notifications.value = generalSettings.notifications || 'enabled';
-      
+
       if (generalSettings.theme === 'light') {
         document.body.classList.add('light-theme');
       } else {
         document.body.classList.remove('light-theme');
       }
+    }
+
+    // Cookie Banner Handling
+    const cookiePopup = document.getElementById('cookie-popup');
+    const acceptBtn = document.getElementById('accept-cookie-btn');
+    const declineBtn = document.getElementById('decline-cookie-btn');
+
+    if (cookiePopup && !localStorage.getItem('cookieConsent')) {
+      setTimeout(() => {
+        cookiePopup.classList.add('show');
+      }, 1000);
+    }
+
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted');
+        if (cookiePopup) cookiePopup.classList.remove('show');
+      });
+    }
+
+    if (declineBtn) {
+      declineBtn.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'declined');
+        if (cookiePopup) cookiePopup.classList.remove('show');
+      });
     }
   });
 
@@ -1057,14 +1210,14 @@ footer {
     });
   }
 
-  // Dismiss modal when clicking background overlay
+  // Dismiss modal on backdrop click
   window.addEventListener('click', (event) => {
     if (event.target === accountModal || event.target === generalModal) {
       closeModals();
     }
   });
 
-  // Update Account Settings Form Handler
+  // Account Settings Form Submit
   const accountForm = document.getElementById('accountSettingsForm');
   if (accountForm) {
     accountForm.addEventListener('submit', (e) => {
@@ -1077,25 +1230,23 @@ footer {
 
       if (currentUser) {
         currentUser.fullName = updatedName;
-        if (updatedPassword) {
-          currentUser.password = updatedPassword;
-        }
+        if (updatedPassword) currentUser.password = updatedPassword;
 
-        // Synchronize in registered users array
         users = users.map(user => user.email === currentUser.email ? currentUser : user);
 
-        // Commit to localStorage
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         localStorage.setItem('registeredUsers', JSON.stringify(users));
 
-        if (welcomeUser) welcomeUser.textContent = `Welcome back, ${currentUser.fullName}!`;
+        if (welcomeText) {
+          welcomeText.innerHTML = `Welcome back, <span class="large-text">${currentUser.fullName}!</span>`;
+        }
         alert('Account settings updated successfully!');
         closeModals();
       }
     });
   }
 
-  // Update General Settings Form Handler
+  // General Settings Form Submit
   const generalForm = document.getElementById('generalSettingsForm');
   if (generalForm) {
     generalForm.addEventListener('submit', (e) => {
@@ -1108,7 +1259,6 @@ footer {
       const generalSettings = { theme, currency, notifications };
       localStorage.setItem('generalSettings', JSON.stringify(generalSettings));
 
-      // Toggle Theme Class
       if (theme === 'light') {
         document.body.classList.add('light-theme');
       } else {
@@ -1120,15 +1270,12 @@ footer {
     });
   }
 
-  // Logout Handler
+  // Logout Button Event Trigger
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      localStorage.removeItem('currentUser');
-      localStorage.setItem('isLoggedIn', 'false');
-      alert('Logged out successfully.');
-      window.location.href = 'Login';
+      handleLogout();
     });
   }
 </script>
