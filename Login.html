@@ -286,17 +286,33 @@ footer {
   </footer>
 
 <script>
+  // Show/Hide Password Toggle
   const togglePassword = document.getElementById('togglePassword');
   const passwordInput = document.getElementById('password');
 
   togglePassword.addEventListener('change', function() {
     passwordInput.type = this.checked ? 'text' : 'password';
   });
+
   document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    localStorage.setItem('isLoggedIn', 'true');
-    alert('Login successful! Redirecting to Explore page...');
-    window.location.href = 'Explore';
+
+    const usernameInput = document.getElementById('username').value.trim().toLowerCase();
+    const passwordInputValue = passwordInput.value;
+    const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+    const foundUser = users.find(user => 
+      (user.email === usernameInput || user.fullName.toLowerCase() === usernameInput) && 
+      user.password === passwordInputValue
+    );
+    if (foundUser) {
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('currentUser', JSON.stringify(foundUser));
+
+      alert('Login successful! Welcome back, ' + foundUser.fullName + '!');
+      window.location.href = 'Explore';
+    } else {
+      alert('Invalid credentials! Please check your email/username and password or sign up for a new account.');
+    }
   });
 </script>
 
