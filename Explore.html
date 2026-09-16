@@ -67,6 +67,11 @@ header {
   color: var(--bg-light);
 }
 
+nav {
+  display: flex;
+  align-items: center;
+}
+
 nav a {
   font-family: 'Roboto', sans-serif;
   text-decoration: none;
@@ -83,6 +88,28 @@ nav a:hover,
 nav a.active {
   background: var(--boeing-blue);
   color: var(--bg-light);
+}
+
+/* User Profile Avatar Styling */
+.user-profile {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 18px;
+}
+
+.profile-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.profile-avatar:hover {
+  transform: scale(1.1);
+  border-color: var(--sunset-orange);
 }
 
 .container {
@@ -602,26 +629,7 @@ footer {
 .btn-decline:hover {
   background-color: #f0f0f0;
 }
-.user-profile {
-  display: flex;
-  align-items: center;
-  margin-left: 18px;
-}
 
-.profile-avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  border: 2px solid var(--bg-light);
-  object-fit: cover;
-  cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.profile-avatar:hover {
-  transform: scale(1.08);
-  border-color: var(--sunset-orange);
-}
 @media (max-width: 600px) {
   .cookie-popup {
     bottom: 10px;
@@ -641,13 +649,15 @@ footer {
   </div>
 
   <nav>
-  <a href="javascript:void(0)" id="nav-home" class="active" onclick="showPage('home')">Home Page</a>
-  <a href="javascript:void(0)" id="nav-about" onclick="showPage('about')">About Page</a>
-  <a href="javascript:void(0)" id="nav-login" onclick="redirectToLogin()">Login</a>
-  <div id="nav-profile" class="user-profile" style="display: none;">
-    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" class="profile-avatar" title="User Profile" onclick="toggleUserMenu()">
-  </div>
-</nav>
+    <a href="javascript:void(0)" id="nav-home" class="active" onclick="showPage('home')">Home Page</a>
+    <a href="javascript:void(0)" id="nav-about" onclick="showPage('about')">About Page</a>
+    <a href="Login" id="nav-login">Login</a>
+    
+    <!-- Profile Avatar Container (Displayed when logged in) -->
+    <div id="nav-profile" class="user-profile" style="display: none;">
+      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" class="profile-avatar" title="Click to Logout" onclick="handleLogout()">
+    </div>
+  </nav>
 </header> 
 
 <div class="container">
@@ -684,7 +694,7 @@ footer {
           </button>
 
           <button class="pin-btn" onclick="inspectPin('Villarrica & Lake District','Araucanía Region, Southern Chile','The Villarrica beautiful lake district centered around Lake Villarrica, known for its clear water and mountain views. The Villarrica Volcano is one of Chile\'s most active volcanoes.','https://i.ibb.co/x8Hh3Mv6/773402455-1336324415248508-3731517403038068632-n.jpg')">
-            📍 Villarrica & Lake District
+            📍 Villarrica &amp; Lake District
           </button>
 
           <button class="pin-btn" onclick="inspectPin('Easter Island (Rapa Nui)','Valparaíso Region','Rapa Nui or Easter Island is a remote volcanic island in the Pacific Ocean. It\'s famous for nearly 1,000 monumental stone human figures called Moai.','https://i.ibb.co/whKxPYcy/775127028-1071486871937086-561372903586744205-n.jpg')">
@@ -940,6 +950,27 @@ footer {
 </footer>
   
 <script>
+// Page Navigation Handler
+function showPage(pageName) {
+  const homeSection = document.getElementById('home-page');
+  const aboutSection = document.getElementById('about-page');
+  const navHome = document.getElementById('nav-home');
+  const navAbout = document.getElementById('nav-about');
+
+  if (pageName === 'home') {
+    homeSection.style.display = 'block';
+    aboutSection.style.display = 'none';
+    navHome.classList.add('active');
+    navAbout.classList.remove('active');
+  } else if (pageName === 'about') {
+    homeSection.style.display = 'none';
+    aboutSection.style.display = 'block';
+    navAbout.classList.add('active');
+    navHome.classList.remove('active');
+  }
+}
+
+// Banner Slideshow
 const bannerImages = [
   "https://cdn.kimkim.com/files/a/content_articles/featured_photos/be98bc277ae019d9301bc24c8aa48bd60c0a84c1/big-27b7dbf129e822d09a9f89b2c6bdc697.jpg",
   "https://d1bv4heaa2n05k.cloudfront.net/user-images/1562240391248/shutterstock-792361144-(1)_main_1562240408468.jpeg"
@@ -964,42 +995,87 @@ bannerImages.forEach(src => {
   img.src = src;
 });
 
+// Interactive Map Box Inspection Function
+function inspectPin(title, location, description, imgUrl) {
+  const displayBox = document.getElementById('map-display-box');
+  displayBox.innerHTML = `
+    <img src="${imgUrl}" alt="${title}">
+    <h3 style="color: var(--light-chile-red); margin-bottom: 5px;">${title}</h3>
+    <p style="font-size: 0.9rem; margin-bottom: 5px;"><b>Location:</b> ${location}</p>
+    <p style="font-size: 0.95rem;">${description}</p>
+  `;
+}
+
+// Carousel Controls
+let carouselIndex = 0;
+function moveCarousel(direction) {
+  const track = document.getElementById('carouselTrack');
+  const cards = document.querySelectorAll('.carousel-card');
+  if (!track || cards.length === 0) return;
+
+  const cardWidth = cards[0].offsetWidth + 20; // 20px gap
+  const maxIndex = cards.length - 1;
+
+  carouselIndex += direction;
+  if (carouselIndex < 0) carouselIndex = 0;
+  if (carouselIndex > maxIndex - 2) carouselIndex = maxIndex - 2;
+
+  track.style.transform = `translateX(-${carouselIndex * cardWidth}px)`;
+}
+
+// User Authentication State Checks
+function checkUserLoginState() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const loginBtn = document.getElementById("nav-login");
+  const profileContainer = document.getElementById("nav-profile");
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (isLoggedIn === "true" && currentUser) {
+    if (loginBtn) loginBtn.style.display = "none";
+    if (profileContainer) profileContainer.style.display = "inline-flex";
+
+    const welcomeText = document.getElementById("welcome-text");
+    if (welcomeText) {
+      welcomeText.innerHTML = "Welcome, " + currentUser.fullName + "!";
+    }
+    return true;
+  } else {
+    if (loginBtn) loginBtn.style.display = "inline-block";
+    if (profileContainer) profileContainer.style.display = "none";
+    return false;
+  }
+}
+
+function handleLogout() {
+  if (confirm("Would you like to log out of your account?")) {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("currentUser");
+    window.location.reload();
+  }
+}
+
+// Window Load Events Initialization
 window.addEventListener('load', function() {
   startBannerSlideshow();
 
-  alert("Welcome to TourISSm Escapade: Discover Chile!");
-  const defaultNames = ["Explorer", "Voyager", "Wanderer", "Adventurer", "Pathfinder","Discoverer","Tourist"];
-  const randomDefault = defaultNames[Math.floor(Math.random() * defaultNames.length)];
+  const userIsLoggedIn = checkUserLoginState();
 
-  let travelerName = prompt("Enter your name, Traveler, to begin exploring Chile!:", randomDefault);
-  let nameToDisplay = (travelerName && travelerName.trim() !== "") ? travelerName.trim() : "Valued Traveler";
+  if (!userIsLoggedIn) {
+    alert("Welcome to TourISSm Escapade: Discover Chile!");
+    const defaultNames = ["Explorer", "Voyager", "Wanderer", "Adventurer", "Pathfinder", "Discoverer", "Tourist"];
+    const randomDefault = defaultNames[Math.floor(Math.random() * defaultNames.length)];
 
-  document.getElementById("welcome-text").innerHTML = "Welcome, " + nameToDisplay + "!";
-  function checkLoginStatus() {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-  const loginBtn = document.getElementById("nav-login");
-  const profileNav = document.getElementById("nav-profile");
+    let travelerName = prompt("Enter your name, Traveler, to begin exploring Chile!:", randomDefault);
+    let nameToDisplay = (travelerName && travelerName.trim() !== "") ? travelerName.trim() : "Valued Traveler";
 
-  if (isLoggedIn === "true") {
-    if (loginBtn) loginBtn.style.display = "none";
-    if (profileNav) profileNav.style.display = "flex";
-  } else {
-    if (loginBtn) loginBtn.style.display = "inline-block";
-    if (profileNav) profileNav.style.display = "none";
+    const welcomeText = document.getElementById("welcome-text");
+    if (welcomeText) {
+      welcomeText.innerHTML = "Welcome, " + nameToDisplay + "!";
+    }
   }
-}
-function toggleUserMenu() {
-  if (confirm("Do you want to log out?")) {
-    localStorage.removeItem("isLoggedIn");
-    checkLoginStatus();
-  }
-}
-
-window.addEventListener('load', function() {
-  checkLoginStatus();
-});
 });
 
+// Cookie Popup Manager
 document.addEventListener("DOMContentLoaded", function () {
   const popup = document.getElementById("cookie-popup");
   const acceptBtn = document.getElementById("accept-cookie-btn");
@@ -1036,71 +1112,11 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.removeItem("cookiesAccepted"); 
       popup.classList.remove("show");
       setTimeout(() => {
-        showBanner();
-      }, 1500);
+        popup.style.display = "none";
+      }, 500);
     });
   }
 });
-
-function showPage(pageName){
-  let home = document.getElementById("home-page");
-  let about = document.getElementById("about-page");
-
-  let navHome = document.getElementById("nav-home");
-  let navAbout = document.getElementById("nav-about");
-
-  if(pageName === "home"){
-    home.style.display = "block";
-    about.style.display = "none";
-
-    navHome.classList.add("active");
-    navAbout.classList.remove("active");
-  }
-
-  if(pageName === "about"){
-    home.style.display = "none";
-    about.style.display = "block";
-
-    navAbout.classList.add("active");
-    navHome.classList.remove("active");
-  }
-}
-function redirectToLogin() {
-  window.location.href = "/Login";
-}
-function inspectPin(name, location, summary, imageUrl){
-  let imageTag = imageUrl ? "<img src='" + imageUrl + "' alt='" + name + "' style='width:100%; max-height:200px; object-fit:cover; border-radius:6px; margin-bottom:12px;'>" : "";
-  document.getElementById("map-display-box").innerHTML =
-  imageTag +
-  "<h3 style='color: var(--chile-red); margin-bottom: 8px;'>📍 " + name + "</h3>" +
-  "<p style='margin-bottom: 10px;'><b>Location:</b> " + location + "</p>" +
-  "<p><b>Overview:</b> " + summary + "</p>";
-}
-
-let currentStep = 0;
-
-function moveCarousel(direction) {
-  const track = document.getElementById('carouselTrack');
-  if (!track) return;
-  const cards = track.children;
-  const totalCards = cards.length;
-  
-  if (totalCards === 0) return;
-
-  const cardWidth = cards[0].offsetWidth + 20;
-  const visibleCards = Math.round(track.parentElement.clientWidth / cards[0].offsetWidth);
-  const maxStep = totalCards - visibleCards;
-
-  currentStep += direction;
-
-  if (currentStep < 0) {
-    currentStep = maxStep;
-  } else if (currentStep > maxStep) {
-    currentStep = 0;
-  }
-
-  track.style.transform = `translateX(-${currentStep * cardWidth}px)`;
-}
 </script>
 
 </body>
