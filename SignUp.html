@@ -295,7 +295,7 @@ footer {
     <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
   </footer>
 
-<script><script>
+<script>
   const togglePassword = document.getElementById('togglePassword');
   const passwordInput = document.getElementById('password');
   const confirmPasswordInput = document.getElementById('confirm-password');
@@ -320,11 +320,7 @@ footer {
       alert("Error: Passwords do not match!");
       return;
     }
-
-    // 2. Fetch existing accounts database from localStorage
     let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
-
-    // 3. Check if email already exists
     const userExists = users.some(user => user.email === email);
     if (userExists) {
       alert("An account with this email address already exists! Please log in instead.");
