@@ -295,7 +295,7 @@ footer {
     <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
   </footer>
 
-<script>
+<script><script>
   const togglePassword = document.getElementById('togglePassword');
   const passwordInput = document.getElementById('password');
   const confirmPasswordInput = document.getElementById('confirm-password');
@@ -306,14 +306,41 @@ footer {
     confirmPasswordInput.type = inputType;
   });
 
+  // Handle Sign Up Form Submission
   document.getElementById('signupForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    if (passwordInput.value !== confirmPasswordInput.value) {
-      alert("Passwords do not match!");
+    
+    const fullName = document.getElementById('fullname').value.trim();
+    const email = document.getElementById('email').value.trim().toLowerCase();
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+
+    // 1. Password Match Validation
+    if (password !== confirmPassword) {
+      alert("Error: Passwords do not match!");
       return;
     }
+
+    // 2. Fetch existing accounts database from localStorage
+    let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+
+    // 3. Check if email already exists
+    const userExists = users.some(user => user.email === email);
+    if (userExists) {
+      alert("An account with this email address already exists! Please log in instead.");
+      return;
+    }
+    const newUser = {
+      fullName: fullName,
+      email: email,
+      password: password
+    };
+    users.push(newUser);
+    localStorage.setItem('registeredUsers', JSON.stringify(users));
     localStorage.setItem('isLoggedIn', 'true');
-    alert('Account created successfully! Redirecting to Explore page...');
+    localStorage.setItem('currentUser', JSON.stringify(newUser));
+
+    alert('Account created successfully! Welcome, ' + fullName + '!');
     window.location.href = 'Explore';
   });
 </script>
