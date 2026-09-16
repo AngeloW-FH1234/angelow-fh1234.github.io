@@ -10,28 +10,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
 
 <style>
-/* Custom Font Definition */
-@font-face {
-  font-family: 'Arizona';
-  src: url('../fonts/Arizona-Regular.woff') format('woff'),
-       url('../fonts/Arizona-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 :root {
   --light-chile-red: #E05146;
   --boeing-blue: #0039A6;
-  --terracota: #C936AD;
   --bg-light: #F0F0F0;
-  --card-bg: #FFF;
   --text-dark: #0F0F0F;
   --very-black: #0C0C0C;
   --dark-red: #5C130E;
   --chile-red: #D52B1E;
   --sunset-orange: #F28C28;
   --andes-gray: #5B6470;
-  
   --font-arizona: 'Playfair Display', 'Times New Roman', serif;
 }
 
@@ -43,188 +31,187 @@
 
 body {
   font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: var(--bg-light);
-  color: var(--text-dark);
-  line-height: 1.6;
+  background-color: var(--very-black);
+  color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
 }
 
-header {
-  position: fixed;
+/* Background image layer matching landing page */
+.bg-hero {
+  position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  height: 60px;
-  background: var(--dark-red);
-  color: white;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://cdn.kimkim.com/files/a/content_articles/featured_photos/be98bc277ae019d9301bc24c8aa48bd60c0a84c1/big-27b7dbf129e822d09a9f89b2c6bdc697.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.35) contrast(1.1);
+  z-index: 1;
+  animation: zoomBg 20s infinite alternate linear;
+}
+
+@keyframes zoomBg {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+/* Glassmorphism Wrapper */
+.landing-wrapper {
+  position: relative;
+  z-index: 2;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 0 20px;
-  z-index: 1000;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-  border-top: 5px solid var(--boeing-blue);
-  font-family: 'Roboto', sans-serif;
-}
-
-.logo {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--bg-light);
-  text-decoration: none;
-}
-
-nav a {
-  font-family: 'Roboto', sans-serif;
-  text-decoration: none;
-  color: white;
-  margin-left: 18px;
-  padding: 8px 16px;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: 700;
-  transition: .3s;
-}
-
-nav a:hover {
-  background: var(--boeing-blue);
-  color: var(--bg-light);
-}
-
-.error-container {
-  max-width: 900px;
-  margin: 100px auto 40px;
-  padding: 20px;
-  flex: 1;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
   text-align: center;
 }
 
-.error-card {
-  background: white;
-  border-radius: 10px;
-  padding: 40px 20px;
-  box-shadow: 0 3px 10px rgba(0,0,0,.08);
+.glass-card {
+  background: rgba(12, 12, 12, 0.8);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--dark-red);
   border-top: 6px solid var(--chile-red);
+  border-radius: 12px;
+  padding: 50px 30px;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 1.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.badge {
+  display: inline-block;
+  background-color: var(--boeing-blue);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
 }
 
 .error-code {
   font-family: var(--font-arizona);
-  font-size: 7rem;
-  color: var(--chile-red);
+  font-size: 6.5rem;
+  font-weight: 700;
+  color: var(--light-chile-red);
   line-height: 1;
   margin-bottom: 10px;
+  text-shadow: 0 4px 10px rgba(213, 43, 30, 0.3);
 }
 
-.error-title {
+.subtitle {
   font-family: var(--font-arizona);
-  font-size: 2.2rem;
   color: var(--sunset-orange);
-  margin-bottom: 15px;
+  font-size: 2.2rem;
+  font-style: italic;
+  margin-bottom: 20px;
+  line-height: 1.2;
 }
 
-.error-description {
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto 30px;
-  color: var(--text-dark);
+.description {
+  font-size: 1.15rem;
+  color: #E0E0E0;
+  line-height: 1.7;
+  margin-bottom: 35px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .action-btn {
   display: inline-block;
-  background: var(--boeing-blue);
+  background-color: var(--chile-red);
   color: white;
-  padding: 12px 28px;
-  border-radius: 25px;
-  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
   text-decoration: none;
-  transition: 0.3s;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  padding: 16px 42px;
+  border-radius: 8px;
+  border: 2px solid var(--boeing-blue);
+  box-shadow: 0 4px 15px rgba(213, 43, 30, 0.4);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .action-btn:hover {
-  background: var(--light-chile-red);
-  transform: scale(1.05);
+  background-color: var(--boeing-blue);
+  border-color: var(--chile-red);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 57, 166, 0.6);
 }
 
-marquee {
-  font-size: 2rem;
-  padding: 3px;
-  background: var(--sunset-orange);
-  margin-top: 40px;
+.credits {
+  margin-top: 30px;
+  font-size: 0.85rem;
+  color: var(--andes-gray);
+  font-family: var(--font-arizona);
 }
 
 footer {
-  background: var(--boeing-blue);
-  font-weight: bold;
+  position: relative;
+  z-index: 2;
+  background: var(--dark-red);
+  border-top: 3px solid var(--boeing-blue);
   color: #ddd;
-  padding: 30px 18px;
+  padding: 15px;
   text-align: center;
+  font-size: 0.85rem;
   font-family: var(--font-arizona);
 }
 
 .footer-main {
-  font-size: 1.2rem;
-  margin-bottom: 4.5px;
-}
-
-.footer-sub {
-  font-size: 0.85rem;
+  margin-bottom: 3px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <a href="./" class="logo">
-    TourISSm Escapade: <span style="color: var(--boeing-blue);">Wonders</span> of <span style="color: var(--chile-red);">Chile</span>
-  </a>
+  <div class="bg-hero"></div>
 
-  <nav>
-    <a href="./">Return to Website</a>
-  </nav>
-</header> 
+  <div class="landing-wrapper">
+    <div class="glass-card">
+      <span class="badge">404 Error - Page Not Found</span>
+      
+      <div class="error-code">404</div>
+      
+      <div class="subtitle">"Lost in the Atacama Desert?"</div>
+      
+      <p class="description">
+        The destination you are looking for has drifted away like the glacial ice of Patagonia or does not exist. Let's get you back on track to explore Chile!
+      </p>
 
-<div class="error-container">
-  <div class="error-card">
-    <div class="error-code">404</div>
-    <h1 class="error-title">Lost in the Atacama Desert?</h1>
-    <p class="error-description">
-      The page or destination you are looking for has drifted away like the glacier ice of Patagonia or does not exist.
-    </p>
-    <a href="./" class="action-btn">📍 Back to Home Page</a>
+      <a href="Home_Page.html" class="action-btn">
+        📍 RETURN TO SAFETY
+      </a>
+
+      <div class="credits">
+        TourISSm Escapade | Statefields School, Inc.
+      </div>
+    </div>
   </div>
-</div>
 
-<marquee behavior="scroll" direction="left" scrollamount="10">
-  🇨🇱 
-  <span style="color: var(--chile-red);">DISCOVER</span>
-  <span style="color: var(--boeing-blue);">CHILE</span>
-  <span style="color: var(--bg-light);">—</span>
-  <span style="color: var(--chile-red);">From</span>
-  <span style="color: var(--boeing-blue);">the</span>
-  <span style="color: var(--bg-light);">dry</span>
-  <span style="color: var(--chile-red);">sands</span>
-  <span style="color: var(--boeing-blue);">of</span>
-  <span style="color: var(--bg-light);">the</span>
-  <span style="color: var(--chile-red);">Atacama</span>
-  <span style="color: var(--boeing-blue);">Desert</span>
-  <span style="color: var(--bg-light);">to</span>
-  <span style="color: var(--chile-red);">the</span>
-  <span style="color: var(--boeing-blue);">frozen</span>
-  <span style="color: var(--bg-light);">peaks</span>
-  <span style="color: var(--chile-red);">of</span>
-  <span style="color: var(--boeing-blue);">Patagonia!</span>
-  🇨🇱
-</marquee>
-
-<footer>
-  <p class="footer-main">© 2026 Grade 8 AP/ICT Integrated Product Task | Statefields School, Inc. All rights reserved.</p>
-  <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
-</footer>
+  <footer>
+    <p class="footer-main">© 2026 Grade 8 AP/ICT Integrated Product Task | Statefields School, Inc. All rights reserved.</p>
+    <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
+  </footer>
 
 </body>
 </html>
