@@ -998,204 +998,139 @@ footer {
 </footer>
 
 <script>
-// Page Navigation Handler
-function showPage(pageName) {
-  const homeSection = document.getElementById('home-page');
-  const aboutSection = document.getElementById('about-page');
-  const navHome = document.getElementById('nav-home');
-  const navAbout = document.getElementById('nav-about');
+  // DOM Elements
+  const accountModal = document.getElementById('accountModal');
+  const generalModal = document.getElementById('generalModal');
+  const welcomeUser = document.getElementById('welcomeUser');
 
-  if (pageName === 'home') {
-    homeSection.style.display = 'block';
-    aboutSection.style.display = 'none';
-    navHome.classList.add('active');
-    navAbout.classList.remove('active');
-  } else if (pageName === 'about') {
-    homeSection.style.display = 'none';
-    aboutSection.style.display = 'block';
-    navAbout.classList.add('active');
-    navHome.classList.remove('active');
-  }
-}
-
-function redirectToLogin() {
-  window.location.href = "/Login";
-}
-
-// Dropdown Functions
-function toggleUserMenu(event) {
-  event.stopPropagation();
-  const dropdown = document.getElementById("profile-dropdown");
-  if (dropdown) {
-    dropdown.classList.toggle("show");
-  }
-}
-
-function openAccountSettings() {
-  alert("Redirecting to Account Settings...");
-}
-
-function openGeneralSettings() {
-  alert("Redirecting to General Settings...");
-}
-
-// Close dropdown if user clicks outside of it
-window.addEventListener("click", function(e) {
-  const dropdown = document.getElementById("profile-dropdown");
-  if (dropdown && dropdown.classList.contains("show")) {
-    dropdown.classList.remove("show");
-  }
-});
-
-// Banner Slideshow
-const bannerImages = [
-  "https://cdn.kimkim.com/files/a/content_articles/featured_photos/be98bc277ae019d9301bc24c8aa48bd60c0a84c1/big-27b7dbf129e822d09a9f89b2c6bdc697.jpg",
-  "https://d1bv4heaa2n05k.cloudfront.net/user-images/1562240391248/shutterstock-792361144-(1)_main_1562240408468.jpeg"
-];
-
-let bannerIndex = 0;
-
-function startBannerSlideshow() {
-  const banner = document.getElementById("welcome-banner");
-  if (!banner) return;
-
-  banner.style.backgroundImage = `url('${bannerImages[0]}')`;
-
-  setInterval(() => {
-    bannerIndex = (bannerIndex + 1) % bannerImages.length;
-    banner.style.backgroundImage = `url('${bannerImages[bannerIndex]}')`;
-  }, 5000);
-}
-
-// Interactive Map Box Inspection Function
-function inspectPin(title, location, description, imgUrl) {
-  const displayBox = document.getElementById('map-display-box');
-  displayBox.innerHTML = `
-    <img src="${imgUrl}" alt="${title}">
-    <h3 style="color: var(--light-chile-red); margin-bottom: 5px;">📍 ${title}</h3>
-    <p style="font-size: 0.9rem; margin-bottom: 5px;"><b>Location:</b> ${location}</p>
-    <p style="font-size: 0.95rem;">${description}</p>
-  `;
-}
-
-// Carousel Controls
-let currentStep = 0;
-
-function moveCarousel(direction) {
-  const track = document.getElementById('carouselTrack');
-  if (!track) return;
-  const cards = track.children;
-  const totalCards = cards.length;
-  
-  if (totalCards === 0) return;
-
-  const cardWidth = cards[0].offsetWidth + 20;
-  const visibleCards = Math.round(track.parentElement.clientWidth / cards[0].offsetWidth);
-  const maxStep = totalCards - visibleCards;
-
-  currentStep += direction;
-
-  if (currentStep < 0) {
-    currentStep = maxStep;
-  } else if (currentStep > maxStep) {
-    currentStep = 0;
+  // Helper function to handle modal closures cleanly
+  function closeModals() {
+    if (accountModal) accountModal.style.display = 'none';
+    if (generalModal) generalModal.style.display = 'none';
   }
 
-  track.style.transform = `translateX(-${currentStep * cardWidth}px)`;
-}
-
-// User Authentication State Checks
-function checkUserLoginState() {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-  const loginBtn = document.getElementById("nav-login");
-  const profileNav = document.getElementById("nav-profile");
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-  if (isLoggedIn === "true" && currentUser) {
-    if (loginBtn) loginBtn.style.display = "none";
-    if (profileNav) profileNav.style.display = "inline-flex";
-
-    const welcomeText = document.getElementById("welcome-text");
-    if (welcomeText) {
-      welcomeText.innerHTML = "Welcome, " + currentUser.fullName + "!";
+  // Load Current User Data & Preferences on Page Load
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (currentUser) {
+      if (welcomeUser) welcomeUser.textContent = `Welcome back, ${currentUser.fullName}!`;
+      const accName = document.getElementById('accName');
+      const accEmail = document.getElementById('accEmail');
+      if (accName) accName.value = currentUser.fullName || '';
+      if (accEmail) accEmail.value = currentUser.email || '';
     }
-    return true;
-  } else {
-    if (loginBtn) loginBtn.style.display = "inline-block";
-    if (profileNav) profileNav.style.display = "none";
-    return false;
-  }
-}
 
-function handleLogout() {
-  if (confirm("Would you like to log out of your account?")) {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("currentUser");
-    window.location.reload();
-  }
-}
+    // Load Saved General Settings
+    const generalSettings = JSON.parse(localStorage.getItem('generalSettings'));
+    if (generalSettings) {
+      const themeSelect = document.getElementById('themeSelect');
+      const currencySelect = document.getElementById('currencySelect');
+      const notifications = document.getElementById('notifications');
 
-// Window Load Initialization
-window.addEventListener('load', function() {
-  startBannerSlideshow();
-  const userIsLoggedIn = checkUserLoginState();
-
-  if (!userIsLoggedIn) {
-    const defaultNames = ["Explorer", "Voyager", "Wanderer", "Adventurer", "Pathfinder", "Discoverer", "Tourist"];
-    const randomDefault = defaultNames[Math.floor(Math.random() * defaultNames.length)];
-
-    let travelerName = prompt("Enter your name, Traveler, to begin exploring Chile!:", randomDefault);
-    let nameToDisplay = (travelerName && travelerName.trim() !== "") ? travelerName.trim() : "Valued Traveler";
-
-    const welcomeText = document.getElementById("welcome-text");
-    if (welcomeText) {
-      welcomeText.innerHTML = "Welcome, " + nameToDisplay + "!";
+      if (themeSelect) themeSelect.value = generalSettings.theme || 'dark';
+      if (currencySelect) currencySelect.value = generalSettings.currency || 'CLP';
+      if (notifications) notifications.value = generalSettings.notifications || 'enabled';
+      
+      if (generalSettings.theme === 'light') {
+        document.body.classList.add('light-theme');
+      } else {
+        document.body.classList.remove('light-theme');
+      }
     }
-  }
-});
+  });
 
-// Cookie Popup Manager
-document.addEventListener("DOMContentLoaded", function () {
-  const popup = document.getElementById("cookie-popup");
-  const acceptBtn = document.getElementById("accept-cookie-btn");
-  const declineBtn = document.getElementById("decline-cookie-btn");
-
-  if (localStorage.getItem("cookiesAccepted") === "true") {
-    if (popup) popup.style.display = "none";
-    return;
-  }
-
-  function showBanner() {
-    if (popup) {
-      popup.style.display = "flex";
-      setTimeout(() => {
-        popup.classList.add("show");
-      }, 50);
-    }
-  }
-
-  showBanner();
-
-  if (acceptBtn) {
-    acceptBtn.addEventListener("click", function () {
-      localStorage.setItem("cookiesAccepted", "true");
-      popup.classList.remove("show");
-      setTimeout(() => {
-        popup.style.display = "none";
-      }, 500);
+  // Modal Control Triggers
+  const openAccountBtn = document.getElementById('openAccountSettings');
+  if (openAccountBtn) {
+    openAccountBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (accountModal) accountModal.style.display = 'flex';
     });
   }
 
-  if (declineBtn) {
-    declineBtn.addEventListener("click", function () {
-      localStorage.removeItem("cookiesAccepted"); 
-      popup.classList.remove("show");
-      setTimeout(() => {
-        popup.style.display = "none";
-      }, 500);
+  const openGeneralBtn = document.getElementById('openGeneralSettings');
+  if (openGeneralBtn) {
+    openGeneralBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (generalModal) generalModal.style.display = 'flex';
     });
   }
-});
+
+  // Dismiss modal when clicking background overlay
+  window.addEventListener('click', (event) => {
+    if (event.target === accountModal || event.target === generalModal) {
+      closeModals();
+    }
+  });
+
+  // Update Account Settings Form Handler
+  const accountForm = document.getElementById('accountSettingsForm');
+  if (accountForm) {
+    accountForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      let users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+
+      const updatedName = document.getElementById('accName').value.trim();
+      const updatedPassword = document.getElementById('accPassword').value;
+
+      if (currentUser) {
+        currentUser.fullName = updatedName;
+        if (updatedPassword) {
+          currentUser.password = updatedPassword;
+        }
+
+        // Synchronize in registered users array
+        users = users.map(user => user.email === currentUser.email ? currentUser : user);
+
+        // Commit to localStorage
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        localStorage.setItem('registeredUsers', JSON.stringify(users));
+
+        if (welcomeUser) welcomeUser.textContent = `Welcome back, ${currentUser.fullName}!`;
+        alert('Account settings updated successfully!');
+        closeModals();
+      }
+    });
+  }
+
+  // Update General Settings Form Handler
+  const generalForm = document.getElementById('generalSettingsForm');
+  if (generalForm) {
+    generalForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const theme = document.getElementById('themeSelect').value;
+      const currency = document.getElementById('currencySelect').value;
+      const notifications = document.getElementById('notifications').value;
+
+      const generalSettings = { theme, currency, notifications };
+      localStorage.setItem('generalSettings', JSON.stringify(generalSettings));
+
+      // Toggle Theme Class
+      if (theme === 'light') {
+        document.body.classList.add('light-theme');
+      } else {
+        document.body.classList.remove('light-theme');
+      }
+
+      alert('General settings saved!');
+      closeModals();
+    });
+  }
+
+  // Logout Handler
+  const logoutBtn = document.getElementById('logoutBtn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem('currentUser');
+      localStorage.setItem('isLoggedIn', 'false');
+      alert('Logged out successfully.');
+      window.location.href = 'Login';
+    });
+  }
 </script>
 
 </body>
