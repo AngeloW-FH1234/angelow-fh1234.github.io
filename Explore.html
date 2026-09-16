@@ -641,10 +641,13 @@ footer {
   </div>
 
   <nav>
-    <a href="javascript:void(0)" id="nav-home" class="active" onclick="showPage('home')">Home Page</a>
-    <a href="javascript:void(0)" id="nav-about" onclick="showPage('about')">About Page</a>
-   <a href="javascript:void(0)" id="nav-login" onclick="redirectToLogin()">Login</a>
-  </nav>
+  <a href="javascript:void(0)" id="nav-home" class="active" onclick="showPage('home')">Home Page</a>
+  <a href="javascript:void(0)" id="nav-about" onclick="showPage('about')">About Page</a>
+  <a href="javascript:void(0)" id="nav-login" onclick="redirectToLogin()">Login</a>
+  <div id="nav-profile" class="user-profile" style="display: none;">
+    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" class="profile-avatar" title="User Profile" onclick="toggleUserMenu()">
+  </div>
+</nav>
 </header> 
 
 <div class="container">
