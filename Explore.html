@@ -975,6 +975,29 @@ window.addEventListener('load', function() {
   let nameToDisplay = (travelerName && travelerName.trim() !== "") ? travelerName.trim() : "Valued Traveler";
 
   document.getElementById("welcome-text").innerHTML = "Welcome, " + nameToDisplay + "!";
+  function checkLoginStatus() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const loginBtn = document.getElementById("nav-login");
+  const profileNav = document.getElementById("nav-profile");
+
+  if (isLoggedIn === "true") {
+    if (loginBtn) loginBtn.style.display = "none";
+    if (profileNav) profileNav.style.display = "flex";
+  } else {
+    if (loginBtn) loginBtn.style.display = "inline-block";
+    if (profileNav) profileNav.style.display = "none";
+  }
+}
+function toggleUserMenu() {
+  if (confirm("Do you want to log out?")) {
+    localStorage.removeItem("isLoggedIn");
+    checkLoginStatus();
+  }
+}
+
+window.addEventListener('load', function() {
+  checkLoginStatus();
+});
 });
 
 document.addEventListener("DOMContentLoaded", function () {
