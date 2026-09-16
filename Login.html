@@ -178,7 +178,16 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 57, 166, 0.6);
 }
-
+.signup-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--very-black);
+  text-decoration: underline;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+  
 .back-link {
   display: inline-block;
   margin-top: 20px;
@@ -188,6 +197,7 @@ body {
   font-size: 0.95rem;
   transition: color 0.3s;
 }
+
 
 .back-link:hover {
   color: var(--boeing-blue);
@@ -240,13 +250,15 @@ footer {
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Enter your password" required>
         </div>
-
+        <a href="SignUp" class="signup-link">
+          "Don't have an account? Sign up."
+        </a>
         <button type="submit" class="action-btn">
           🔒 LOGIN TO ACCOUNT
         </button>
       </form>
 
-      <a href="Home_Page.html" class="back-link">
+      <a href="Home" class="back-link">
         ← Return to Home Page
       </a>
 
