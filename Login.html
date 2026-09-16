@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - TourISSm Escapade: Chile</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --light-chile-red: #E05146;
+  --boeing-blue: #0039A6;
+  --bg-light: #F0F0F0;
+  --text-dark: #0F0F0F;
+  --very-black: #0C0C0C;
+  --dark-red: #5C130E;
+  --chile-red: #D52B1E;
+  --sunset-orange: #F28C28;
+  --andes-gray: #5B6470;
+  --font-arizona: 'Playfair Display', 'Times New Roman', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--very-black);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background image layer matching landing page */
+.bg-hero {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://cdn.kimkim.com/files/a/content_articles/featured_photos/be98bc277ae019d9301bc24c8aa48bd60c0a84c1/big-27b7dbf129e822d09a9f89b2c6bdc697.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.35) contrast(1.1);
+  z-index: 1;
+  animation: zoomBg 20s infinite alternate linear;
+}
+
+@keyframes zoomBg {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+.landing-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.glass-card {
+  background: rgba(160, 160, 160, 0.85);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--dark-red);
+  border-top: 6px solid var(--chile-red);
+  border-radius: 12px;
+  padding: 40px 35px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 1.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.badge {
+  display: inline-block;
+  background-color: var(--boeing-blue);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-family: var(--font-arizona);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--very-black);
+  line-height: 1.1;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-family: var(--font-arizona);
+  color: var(--dark-red);
+  font-size: 1.3rem;
+  font-style: italic;
+  margin-bottom: 25px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--very-black);
+}
+
+.form-group input {
+  padding: 12px 15px;
+  border-radius: 6px;
+  border: 1.5px solid var(--dark-red);
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+  border-color: var(--boeing-blue);
+  box-shadow: 0 0 8px rgba(0, 57, 166, 0.4);
+}
+
+.action-btn {
+  width: 100%;
+  margin-top: 10px;
+  background-color: var(--chile-red);
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 8px;
+  border: 2px solid var(--boeing-blue);
+  box-shadow: 0 4px 15px rgba(213, 43, 30, 0.4);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.action-btn:hover {
+  background-color: var(--boeing-blue);
+  border-color: var(--chile-red);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 57, 166, 0.6);
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--very-black);
+  text-decoration: underline;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: var(--boeing-blue);
+}
+
+.credits {
+  margin-top: 25px;
+  font-size: 0.85rem;
+  color: var(--dark-red);
+  font-family: var(--font-arizona);
+  font-weight: bold;
+}
+
+footer {
+  position: relative;
+  z-index: 2;
+  background: var(--dark-red);
+  border-top: 3px solid var(--boeing-blue);
+  color: #ddd;
+  padding: 15px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-family: var(--font-arizona);
+}
+
+.footer-main {
+  margin-bottom: 3px;
+}
+</style>
+</head>
+
+<body>
+
+  <div class="bg-hero"></div>
+
+  <div class="landing-wrapper">
+    <div class="glass-card">
+      <span class="badge">Traveler Access</span>
+      
+      <h1 class="title">Welcome Back</h1>
+      <div class="subtitle">"Log in to continue your Chilean Escapade"</div>
+      
+      <form class="login-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Login successful!');">
+        <div class="form-group">
+          <label for="username">Username or Email</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="action-btn">
+          🔒 LOGIN TO ACCOUNT
+        </button>
+      </form>
+
+      <a href="Home_Page.html" class="back-link">
+        ← Return to Home Page
+      </a>
+
+      <div class="credits">
+        TourISSm Escapade | Statefields School, Inc.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="footer-main">© 2026 Grade 8 AP/ICT Integrated Product Task | Statefields School, Inc. All rights reserved.</p>
+    <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
+  </footer>
+
+</body>
+</html>
