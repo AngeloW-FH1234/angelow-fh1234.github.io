@@ -41,7 +41,6 @@ body {
   position: relative;
 }
 
-/* Background image layer matching landing page */
 .bg-hero {
   position: absolute;
   top: 0;
@@ -155,6 +154,23 @@ body {
   box-shadow: 0 0 8px rgba(0, 57, 166, 0.4);
 }
 
+.show-password-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--very-black);
+  cursor: pointer;
+  user-select: none;
+  margin-top: -6px;
+}
+
+.show-password-container input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
 .action-btn {
   width: 100%;
   margin-top: 10px;
@@ -178,19 +194,10 @@ body {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 57, 166, 0.6);
 }
-.signup-link {
+
+.signup-link, .back-link {
   display: inline-block;
-  margin-top: 20px;
-  color: var(--very-black);
-  text-decoration: underline;
-  font-weight: 700;
-  font-size: 0.95rem;
-  transition: color 0.3s;
-}
-  
-.back-link {
-  display: inline-block;
-  margin-top: 20px;
+  margin-top: 15px;
   color: var(--very-black);
   text-decoration: underline;
   font-weight: 700;
@@ -198,8 +205,7 @@ body {
   transition: color 0.3s;
 }
 
-
-.back-link:hover {
+.back-link:hover, .signup-link:hover {
   color: var(--boeing-blue);
 }
 
@@ -240,7 +246,7 @@ footer {
       <h1 class="title">Welcome Back</h1>
       <div class="subtitle">"Log in to continue your Chilean Escapade"</div>
       
-      <form class="login-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Login successful!');">
+      <form class="login-form" id="loginForm">
         <div class="form-group">
           <label for="username">Username or Email</label>
           <input type="text" id="username" name="username" placeholder="Enter your username" required>
@@ -250,14 +256,20 @@ footer {
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Enter your password" required>
         </div>
-        <a href="SignUp" class="signup-link">
-          "Don't have an account? Sign up."
-        </a>
+
+        <label class="show-password-container">
+          <input type="checkbox" id="togglePassword"> Show Password
+        </label>
+
         <button type="submit" class="action-btn">
           🔒 LOGIN TO ACCOUNT
         </button>
       </form>
 
+      <a href="SignUp" class="signup-link">
+        Don't have an account? Sign up.
+      </a>
+      <br>
       <a href="Explore" class="back-link">
         ← Return to Home Page
       </a>
@@ -272,6 +284,21 @@ footer {
     <p class="footer-main">© 2026 Grade 8 AP/ICT Integrated Product Task | Statefields School, Inc. All rights reserved.</p>
     <p class="footer-sub">Group 8 8A, SY 2026 - 2027</p>
   </footer>
+
+<script>
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('password');
+
+  togglePassword.addEventListener('change', function() {
+    passwordInput.type = this.checked ? 'text' : 'password';
+  });
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    localStorage.setItem('isLoggedIn', 'true');
+    alert('Login successful! Redirecting to Explore page...');
+    window.location.href = 'Explore';
+  });
+</script>
 
 </body>
 </html>
