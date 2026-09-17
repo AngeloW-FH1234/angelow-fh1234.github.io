@@ -1004,10 +1004,12 @@ footer {
 </footer>
 
 <script>
-  // Global State Variables
+ const SUPABASE_URL = 'https://zxlczdemkzczupfxcmuy.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_4QJMxVQMhn3CpnWDq9l0Kg__mLgoBL3';
+const supabase = supabase.createClient("https://zxlczdemkzczupfxcmuy.supabase.co/rest/v1/", SUPABASE_KEY);
+  
   let currentCarouselIndex = 0;
 
-  // DOM Elements
   const accountModal = document.getElementById('accountModal');
   const generalModal = document.getElementById('generalModal');
   const welcomeText = document.getElementById('welcome-text');
