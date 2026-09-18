@@ -697,21 +697,21 @@ footer {
   </div>
 
   <nav>
-    <a href="javascript:void(0)" id="nav-home" class="active" onclick="showPage('home')">Home Page</a>
-    <a href="javascript:void(0)" id="nav-about" onclick="showPage('about')">About Page</a>
-    <a href="javascript:void(0)" id="nav-login" onclick="redirectToLogin()">Login</a>
-    
-    <!-- Profile Dropdown Section -->
-    <div id="nav-profile" class="user-profile" style="display: none;">
-      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" class="profile-avatar" title="User Menu" onclick="toggleUserMenu(event)">
-      <div id="profile-dropdown" class="dropdown-menu">
-        <a href="javascript:void(0)" onclick="openAccountSettings()">Account Settings</a>
-        <a href="javascript:void(0)" onclick="openGeneralSettings()">General Settings</a>
-        <div class="dropdown-divider"></div>
-        <a href="javascript:void(0)" onclick="handleLogout()">Log Out</a>
-      </div>
+<nav>
+  <a href="javascript:void(0)" id="nav-home" class="active" onclick="showPage('home')">Home Page</a>
+  <a href="javascript:void(0)" id="nav-about" onclick="showPage('about')">About Page</a>
+  <a href="javascript:void(0)" id="nav-login" onclick="redirectToLogin()">Login</a>
+
+  <div id="nav-profile" class="user-profile" style="display: none;">
+    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" class="profile-avatar" title="User Menu" onclick="toggleUserMenu(event)">
+    <div id="profile-dropdown" class="dropdown-menu">
+      <a href="javascript:void(0)" onclick="openAccountSettings()">Account Settings</a>
+      <a href="javascript:void(0)" onclick="openGeneralSettings()">General Settings</a>
+      <div class="dropdown-divider"></div>
+      <a href="javascript:void(0)" onclick="handleLogout()">Log Out</a>
     </div>
-  </nav>
+  </div>
+</nav>
 </header> 
 
 <div class="container">
